@@ -1,0 +1,92 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:5857370418760280315",
+      "lastPropertyId": "17:2505609688006855290",
+      "name": "Product",
+      "properties": [
+        {
+          "id": "1:1446420258992468549",
+          "name": "id"
+        },
+        {
+          "id": "2:5348296109592381247",
+          "name": "name"
+        },
+        {
+          "id": "3:3027062373714717430",
+          "name": "details"
+        },
+        {
+          "id": "4:2969573745597637057",
+          "name": "category"
+        },
+        {
+          "id": "5:6624719556583593739",
+          "name": "subcategory"
+        },
+        {
+          "id": "6:1893762308117553690",
+          "name": "brand_description"
+        },
+        {
+          "id": "7:1675600849608876090",
+          "name": "category_description"
+        },
+        {
+          "id": "8:3073563269452671774",
+          "name": "subcategory_description"
+        },
+        {
+          "id": "9:4786117575826080038",
+          "name": "price"
+        },
+        {
+          "id": "10:7945849532042180107",
+          "name": "weight"
+        },
+        {
+          "id": "11:8164695784072704386",
+          "name": "quantity"
+        },
+        {
+          "id": "12:65594999765909936",
+          "name": "stock_type"
+        },
+        {
+          "id": "13:6653446568854722039",
+          "name": "link_toped"
+        },
+        {
+          "id": "14:4834263454641114297",
+          "name": "link_shopee"
+        },
+        {
+          "id": "15:1762061523204307089",
+          "name": "link_bukalapak"
+        },
+        {
+          "id": "17:2505609688006855290",
+          "name": "brand"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:5857370418760280315",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    3071490442819700666
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}
