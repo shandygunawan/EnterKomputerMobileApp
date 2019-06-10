@@ -11,4 +11,10 @@ interface ProductEndpoints {
 
     @GET("allinone.json")
     fun getListAIO(): Call<List<Product>>
+
+    @GET("casing.json")
+    fun getListCasing(): Call<List<Product>>
+
+    @GET("coolerfan.json")
+    fun getListCoolerFan(): Call<List<Product>>
 }

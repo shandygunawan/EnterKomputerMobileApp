@@ -15,4 +15,15 @@
         android:title="All in One"
         />
 
+    <item
+        android:id="@+id/ivCategoryCasing"
+        android:icon="@drawable/icon_casing"
+        android:title="Casing"
+        />
+
+    <item
+        android:id="@+id/ivCategoryCoolerFan"
+        android:icon="@drawable/icon_cooler"
+        android:title="Cooler Fan" />
+
 </menu>
