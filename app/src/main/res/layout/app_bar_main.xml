@@ -31,4 +31,16 @@
             android:layout_margin="@dimen/fab_margin"
             app:srcCompat="@android:drawable/ic_dialog_email"/>
 
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navBottomProducts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"
+        app:menu="@menu/nav_bottom_products"
+        app:itemIconTint="@drawable/nav_bottom_products_foreground"
+        app:itemTextColor="@drawable/nav_bottom_products_foreground">
+
+    </android.support.design.widget.BottomNavigationView>
+
 </android.support.design.widget.CoordinatorLayout>
