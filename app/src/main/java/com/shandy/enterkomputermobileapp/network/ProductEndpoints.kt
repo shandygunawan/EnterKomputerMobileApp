@@ -17,4 +17,19 @@ interface ProductEndpoints {
 
     @GET("coolerfan.json")
     fun getListCoolerFan(): Call<List<Product>>
+
+    @GET("drawing.json")
+    fun getListDrawingTablet(): Call<List<Product>>
+
+    @GET("drone.json")
+    fun getListDrone(): Call<List<Product>>
+
+    @GET("flashdisk.json")
+    fun getListFlashdisk(): Call<List<Product>>
+
+    @GET("gadget.json")
+    fun getListGadget(): Call<List<Product>>
+
+    @GET("harddisk.json")
+    fun getListHarddisk(): Call<List<Product>>
 }
