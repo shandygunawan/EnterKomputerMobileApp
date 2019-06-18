@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <array name="array_bottom_navigation_products">
+        <item name="accessories">Accessories</item>
+        <item name="aio">AIO</item>
+    </array>
+    
+</resources>
