@@ -1,9 +1,9 @@
 package com.shandy.enterkomputermobileapp.adapters
 
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.utils.inflate
