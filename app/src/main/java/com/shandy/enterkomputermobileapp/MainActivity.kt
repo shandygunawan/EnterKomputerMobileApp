@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -13,6 +14,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.tabs.TabLayout
 import com.shandy.enterkomputermobileapp.adapters.ListProductAdapter
 import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.network.ProductEndpoints
@@ -133,6 +135,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      *                        TAB LAYOUT                         *
      *************************************************************/
 
+
+
     private fun initTabLayout(){
 
         // Set colors for icon states
@@ -152,6 +156,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
 
+        tabLayoutListProducts.addOnTabSelectedListener(
+            object: TabLayout.OnTabSelectedListener{
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                }
+
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when(tab?.position){
+                        0 -> setRecyclerView("accessories")
+                        1 -> setRecyclerView("aio")
+                    }
+                }
+
+            }
+        )
     }
 
     /*************************************************************
@@ -159,6 +182,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      *************************************************************/
 
     private fun setRecyclerView(category: String){
+        rvListProducts.visibility = View.GONE
+        pbListProducts.visibility = View.VISIBLE
         doAsync {
             val webServices = RetrofitClient()
                 .getInstance(Constants.URL_PRODUCT_BASE)
@@ -173,6 +198,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             uiThread {
                 adapter = ListProductAdapter(products)
                 rvListProducts.adapter = adapter
+                pbListProducts.visibility = View.GONE
+                rvListProducts.visibility = View.VISIBLE
             }
         }
     }
