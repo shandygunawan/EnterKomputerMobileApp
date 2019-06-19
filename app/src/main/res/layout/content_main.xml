@@ -8,6 +8,7 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListProducts"
         android:layout_width="match_parent"

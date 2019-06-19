@@ -1,22 +1,24 @@
 package com.shandy.enterkomputermobileapp
 
+import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
+import android.view.Menu
 import android.view.MenuItem
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.view.Menu
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.navigation.NavigationView
 import com.shandy.enterkomputermobileapp.adapters.ListProductAdapter
 import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.network.ProductEndpoints
 import com.shandy.enterkomputermobileapp.network.RetrofitClient
 import com.shandy.enterkomputermobileapp.utils.Constants
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -28,36 +30,32 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var adapter: ListProductAdapter
     private var products: List<Product>? = null
 
+    /*************************************************************
+     *                          LIFECYCLE                        *
+     *************************************************************/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
-        val toggle = ActionBarDrawerToggle(
-            this,
-            drawerLayout,
-            toolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+        /* Initialize Navigation Drawer */
+        initNavigationDrawer()
 
-        navView.setNavigationItemSelectedListener(this)
+        /* Initialize Tab Layout */
+        initTabLayout()
 
         /* Initialize RecyclerView */
         linearLayoutManager = LinearLayoutManager(this)
         rvListProducts.layoutManager = linearLayoutManager
         setRecyclerView("accessories")
     }
+
+
+    /*************************************************************
+     *                      OPTIONS MENU                         *
+     *************************************************************/
 
     override fun onBackPressed() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -82,6 +80,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    /*************************************************************
+     *                  NAVIGATION DRAWER                        *
+     *************************************************************/
+
+    private fun initNavigationDrawer(){
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawerLayout,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        val navView: NavigationView = findViewById(R.id.nvMain)
+        navView.setNavigationItemSelectedListener(this)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -109,6 +127,31 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    /*************************************************************
+     *                        TAB LAYOUT                         *
+     *************************************************************/
+
+    private fun initTabLayout(){
+
+        // Set colors for icon states
+        val colors: ColorStateList = if(Build.VERSION.SDK_INT >= 23){
+            resources.getColorStateList(R.color.tab_icon_products, theme)
+        } else {
+            resources.getColorStateList(R.color.tab_icon_products)
+        }
+
+        for(i in 0..tabLayoutListProducts.tabCount){
+            val tab = tabLayoutListProducts.getTabAt(i)
+            var icon = tab?.icon
+
+            if(icon != null){
+                icon = DrawableCompat.wrap(icon)
+                DrawableCompat.setTintList(icon, colors)
+            }
+        }
+
     }
 
     /*************************************************************
