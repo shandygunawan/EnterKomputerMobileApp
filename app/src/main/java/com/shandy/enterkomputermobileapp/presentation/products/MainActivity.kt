@@ -1,4 +1,4 @@
-package com.shandy.enterkomputermobileapp
+package com.shandy.enterkomputermobileapp.presentation.products
 
 import android.content.res.ColorStateList
 import android.os.Build
@@ -15,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
+import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.adapters.ListProductAdapter
 import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.network.ProductEndpoints
