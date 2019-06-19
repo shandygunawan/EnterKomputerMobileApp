@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:5857370418760280315",
-      "lastPropertyId": "16:3071490442819700666",
+      "lastPropertyId": "17:2505609688006855290",
       "name": "Product",
       "properties": [
         {
@@ -67,6 +67,10 @@
         {
           "id": "15:1762061523204307089",
           "name": "link_bukalapak"
+        },
+        {
+          "id": "17:2505609688006855290",
+          "name": "brand"
         }
       ],
       "relations": []

@@ -172,7 +172,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         1 -> setRecyclerView("aio")
                     }
                 }
-
             }
         )
     }
@@ -192,6 +191,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             when(category){
                 "accessories" -> products = webServices.getListAccessories().execute().body()
                 "aio" -> products = webServices.getListAIO().execute().body()
+                "casing" -> products = webServices.getListCasing().execute().body()
+                "coolerfan" -> products = webServices.getListCoolerFan().execute().body()
                 else -> products = null
             }
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/ivCategoryAccessories"
+        android:icon="@drawable/icon_accessories"
+        android:title="Accessories"
+        />
+
+    <item
+        android:id="@+id/ivCategoryAIO"
+        android:icon="@drawable/icon_aio"
+        android:title="All in One"
+        />
+
+    <item
+        android:id="@+id/ivCategoryCasing"
+        android:icon="@drawable/icon_casing"
+        android:title="Casing"
+        />
+
+    <item
+        android:id="@+id/ivCategoryCoolerFan"
+        android:icon="@drawable/icon_cooler"
+        android:title="Cooler Fan" />
+
+</menu>
