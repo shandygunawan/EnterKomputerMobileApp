@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.shandy.enterkomputermobileapp.R
-import com.shandy.enterkomputermobileapp.adapters.ListProductAdapter
 import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.network.ProductEndpoints
 import com.shandy.enterkomputermobileapp.network.RetrofitClient
@@ -26,7 +25,7 @@ import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class ProductsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     /* Member Variables */
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -198,7 +197,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             uiThread {
-                adapter = ListProductAdapter(products)
+                adapter =
+                    ListProductAdapter(
+                        products
+                    )
                 rvListProducts.adapter = adapter
                 pbListProducts.visibility = View.GONE
                 rvListProducts.visibility = View.VISIBLE

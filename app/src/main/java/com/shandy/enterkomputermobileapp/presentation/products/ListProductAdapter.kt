@@ -1,4 +1,4 @@
-package com.shandy.enterkomputermobileapp.adapters
+package com.shandy.enterkomputermobileapp.presentation.products
 
 import android.util.Log
 import android.view.View
@@ -13,10 +13,12 @@ class ListProductAdapter(private val products : List<Product>?) : RecyclerView.A
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
         val inflatedView = parent.inflate(R.layout.item_product, false)
-        return ProductHolder(inflatedView)
+        return ProductHolder(
+            inflatedView
+        )
     }
 
-    override fun onBindViewHolder(holder: ListProductAdapter.ProductHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductHolder, position: Int) {
         holder.bind(products!![position])
     }
 
