@@ -25,7 +25,8 @@ import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class ProductsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class ListProductsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+ListProductsView {
 
     /* Member Variables */
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -51,9 +52,53 @@ class ProductsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         /* Initialize RecyclerView */
         linearLayoutManager = LinearLayoutManager(this)
         rvListProducts.layoutManager = linearLayoutManager
-        setRecyclerView("accessories")
+        showProducts("accessories")
     }
 
+    /*************************************************************
+     *                          VIEW                             *
+     *************************************************************/
+
+    override fun showLoading(isLoading: Boolean) {
+        if(isLoading){
+            rvListProducts.visibility = View.GONE
+            pbListProducts.visibility = View.VISIBLE
+        }
+        else {
+            rvListProducts.visibility = View.VISIBLE
+            pbListProducts.visibility = View.GONE
+        }
+    }
+
+    override fun showError(message: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showProducts(category: String) {
+        showLoading(isLoading = true)
+        doAsync {
+            val webServices = RetrofitClient()
+                .getInstance(Constants.URL_PRODUCT_BASE)
+                .create(ProductEndpoints::class.java)
+
+            when(category){
+                "accessories" -> products = webServices.getListAccessories().execute().body()
+                "aio" -> products = webServices.getListAIO().execute().body()
+                "casing" -> products = webServices.getListCasing().execute().body()
+                "coolerfan" -> products = webServices.getListCoolerFan().execute().body()
+                else -> products = null
+            }
+
+            uiThread {
+                adapter =
+                    ListProductAdapter(
+                        products
+                    )
+                rvListProducts.adapter = adapter
+                showLoading(isLoading = false)
+            }
+        }
+    }
 
     /*************************************************************
      *                      OPTIONS MENU                         *
@@ -135,8 +180,6 @@ class ProductsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
      *                        TAB LAYOUT                         *
      *************************************************************/
 
-
-
     private fun initTabLayout(){
 
         // Set colors for icon states
@@ -168,43 +211,12 @@ class ProductsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when(tab?.position){
-                        0 -> setRecyclerView("accessories")
-                        1 -> setRecyclerView("aio")
+                        0 -> showProducts("accessories")
+                        1 -> showProducts("aio")
+                        2 -> showProducts("coolerfan")
                     }
                 }
             }
         )
-    }
-
-    /*************************************************************
-     *                       RecyclerView                        *
-     *************************************************************/
-
-    private fun setRecyclerView(category: String){
-        rvListProducts.visibility = View.GONE
-        pbListProducts.visibility = View.VISIBLE
-        doAsync {
-            val webServices = RetrofitClient()
-                .getInstance(Constants.URL_PRODUCT_BASE)
-                .create(ProductEndpoints::class.java)
-
-            when(category){
-                "accessories" -> products = webServices.getListAccessories().execute().body()
-                "aio" -> products = webServices.getListAIO().execute().body()
-                "casing" -> products = webServices.getListCasing().execute().body()
-                "coolerfan" -> products = webServices.getListCoolerFan().execute().body()
-                else -> products = null
-            }
-
-            uiThread {
-                adapter =
-                    ListProductAdapter(
-                        products
-                    )
-                rvListProducts.adapter = adapter
-                pbListProducts.visibility = View.GONE
-                rvListProducts.visibility = View.VISIBLE
-            }
-        }
     }
 }
