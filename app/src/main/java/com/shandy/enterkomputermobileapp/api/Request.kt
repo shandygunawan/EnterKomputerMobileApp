@@ -13,7 +13,7 @@ class Request {
         /* Get Response */
         val responseStr = URL(url).readText()
 
-        /* Create adapter for JSON ARRAY */
+        /* Createg adapter for JSON ARRAY */
         val listType = Types.newParameterizedType(List::class.java, Product::class.java)
         val moshi: Moshi = Moshi.Builder().build()
         val adapter: JsonAdapter<List<Product>> = moshi.adapter(listType)

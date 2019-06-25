@@ -78,14 +78,17 @@ ListProductsView {
         showLoading(isLoading = true)
         doAsync {
             val webServices = RetrofitClient()
-                .getInstance(Constants.URL_PRODUCT_BASE)
+                .getInstance(Constants.URLS.URL_PRODUCT_BASE)
                 .create(ProductEndpoints::class.java)
 
             when(category){
-                "accessories" -> products = webServices.getListAccessories().execute().body()
-                "aio" -> products = webServices.getListAIO().execute().body()
-                "casing" -> products = webServices.getListCasing().execute().body()
-                "coolerfan" -> products = webServices.getListCoolerFan().execute().body()
+                Constants.Products.PRODUCT_ACCESSORIES -> products = webServices.getListAccessories().execute().body()
+                Constants.Products.PRODUCT_AIO -> products = webServices.getListAIO().execute().body()
+                Constants.Products.PRODUCT_CASING -> products = webServices.getListCasing().execute().body()
+                Constants.Products.PRODUCT_COOLER -> products = webServices.getListCoolerFan().execute().body()
+                Constants.Products.PRODUCT_DRAWING -> products = webServices.getListDrawingTablet().execute().body()
+                Constants.Products.PRODUCT_DRONE -> products = webServices.getListDrone().execute().body()
+                Constants.Products.PRODUCT_FLASHDISK -> products = webServices.getListFlashdisk().execute().body()
                 else -> products = null
             }
 
@@ -211,9 +214,13 @@ ListProductsView {
 
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when(tab?.position){
-                        0 -> showProducts("accessories")
-                        1 -> showProducts("aio")
-                        2 -> showProducts("coolerfan")
+                        0 -> showProducts(Constants.Products.PRODUCT_ACCESSORIES)
+                        1 -> showProducts(Constants.Products.PRODUCT_AIO)
+                        2 -> showProducts(Constants.Products.PRODUCT_CASING)
+                        3 -> showProducts(Constants.Products.PRODUCT_COOLER)
+                        4 -> showProducts(Constants.Products.PRODUCT_DRAWING)
+                        5 -> showProducts(Constants.Products.PRODUCT_DRONE)
+                        6 -> showProducts(Constants.Products.PRODUCT_FLASHDISK)
                     }
                 }
             }

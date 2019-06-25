@@ -40,6 +40,41 @@
                 android:icon="@drawable/icon_aio"
                 android:text="All in One"/>
 
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabProductCasing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_casing"
+                android:text="Casing"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabProductCoolerFan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_cooler"
+                android:text="Cooler Fan"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabProductDrawing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_drawing"
+                android:text="Drawing"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabProductDrone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_drone"
+                android:text="Drone" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabProductFlashdisk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_flashdisk"
+                android:text="Flashdisk"/>
+
         </com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
