@@ -2,6 +2,16 @@ package com.shandy.enterkomputermobileapp.utils
 
 object Constants {
 
+    object Endpoints {
+        const val ENDPOINT_PRODUCT_ACCESSORIES = "accessories.json"
+        const val ENDPOINT_PRODUCT_AIO = "allinone.json"
+        const val ENDPOINT_PRODUCT_CASING = "casing.json"
+        const val ENDPOINT_PRODUCT_COOLER = "coolerfan.json"
+        const val ENDPOINT_PRODUCT_DRAWING = "drawing.json"
+        const val ENDPOINT_PRODUCT_DRONE = "drone.json"
+        const val ENDPOINT_PRODUCT_FLASHDISK = "flashdisk.json"
+    }
+
     /* URL */
     object URLS {
         const val URL_PRODUCT_BASE = "https://enterkomputer.com/api/product/"

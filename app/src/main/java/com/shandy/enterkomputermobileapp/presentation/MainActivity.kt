@@ -17,7 +17,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.models.Product
-import com.shandy.enterkomputermobileapp.network.ProductEndpoints
+import com.shandy.enterkomputermobileapp.network.Endpoints
 import com.shandy.enterkomputermobileapp.network.RetrofitClient
 import com.shandy.enterkomputermobileapp.presentation.products.ListProductAdapter
 import com.shandy.enterkomputermobileapp.presentation.products.ListProductsView
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         doAsync {
             val webServices = RetrofitClient()
                 .getInstance(Constants.URLS.URL_PRODUCT_BASE)
-                .create(ProductEndpoints::class.java)
+                .create(Endpoints.ProductEndpoints::class.java)
 
             when(category){
                 Constants.Products.PRODUCT_ACCESSORIES -> products = webServices.getListAccessories().execute().body()
