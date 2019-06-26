@@ -1,4 +1,4 @@
-package com.shandy.enterkomputermobileapp.presentation.products
+package com.shandy.enterkomputermobileapp.presentation
 
 import android.content.res.ColorStateList
 import android.os.Build
@@ -19,14 +19,16 @@ import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.network.ProductEndpoints
 import com.shandy.enterkomputermobileapp.network.RetrofitClient
+import com.shandy.enterkomputermobileapp.presentation.products.ListProductAdapter
+import com.shandy.enterkomputermobileapp.presentation.products.ListProductsView
 import com.shandy.enterkomputermobileapp.utils.Constants
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class ListProductsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-ListProductsView {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+    ListProductsView {
 
     /* Member Variables */
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -150,27 +152,25 @@ ListProductsView {
 
         val navView: NavigationView = findViewById(R.id.nvMain)
         navView.setNavigationItemSelectedListener(this)
+        navView.setCheckedItem(R.id.navProducts)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_home -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
+            R.id.navProducts -> {
 
             }
-            R.id.nav_slideshow -> {
+            R.id.navSimulation -> {
 
             }
-            R.id.nav_tools -> {
+            R.id.navHowTo -> {
 
             }
-            R.id.nav_share -> {
+            R.id.navTips -> {
 
             }
-            R.id.nav_send -> {
+            R.id.navOrderTracking -> {
 
             }
         }

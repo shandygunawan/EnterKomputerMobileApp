@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:title="@string/menu_home" />
+            android:id="@+id/navProducts"
+            android:icon="@drawable/icon_products"
+            android:title="Products" />
         <item
-            android:id="@+id/nav_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/navSimulation"
+            android:icon="@drawable/icon_aio"
+            android:title="Simulation" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/navHowTo"
+            android:icon="@drawable/icon_questionmark"
+            android:title="How to" />
         <item
-            android:id="@+id/nav_tools"
-            android:title="@string/menu_tools" />
+            android:id="@+id/navTips"
+            android:icon="@drawable/icon_i"
+            android:title="Tips" />
+        <item
+            android:id="@+id/navOrderTracking"
+            android:icon="@drawable/icon_magnifier"
+            android:title="Order Tracking" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:title="@string/menu_share" />
-            <item
-                android:id="@+id/nav_send"
-                android:title="@string/menu_send" />
-        </menu>
-    </item>
 
 </menu>

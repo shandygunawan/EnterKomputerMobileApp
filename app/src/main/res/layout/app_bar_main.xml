@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.products.ListProductsActivity">
+    tools:context=".presentation.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -65,14 +65,14 @@
                 android:id="@+id/tabProductDrone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/ic_drone"
+                android:icon="@drawable/icon_drone"
                 android:text="Drone" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabProductFlashdisk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/ic_flashdisk"
+                android:icon="@drawable/icon_flashdisk"
                 android:text="Flashdisk"/>
 
         </com.google.android.material.tabs.TabLayout>
