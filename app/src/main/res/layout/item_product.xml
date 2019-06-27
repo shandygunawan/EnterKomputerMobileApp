@@ -42,7 +42,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/icon_brand"
+            android:src="@drawable/icon_brand_colored"
             app:layout_constraintTop_toBottomOf="@id/lineProductName"
             app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -62,7 +62,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/icon_subcategory"
+            android:src="@drawable/icon_subcategory_bw"
             app:layout_constraintTop_toBottomOf="@id/ivBrand"
             app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -82,7 +82,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/icon_price"
+            android:src="@drawable/icon_price_colored"
             app:layout_constraintTop_toBottomOf="@id/ivSubCategory"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
