@@ -1,8 +1,10 @@
 package com.shandy.enterkomputermobileapp.presentation.products
 
-import android.util.Log
+import android.app.SearchManager
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.models.Product
@@ -24,23 +26,35 @@ class ProductAdapter(private val products : List<Product>?) : RecyclerView.Adapt
 
     override fun getItemCount() = products?.size ?: 0 // If not null return size, if null return 0
 
-    class ProductHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener{
+    class ProductHolder(v: View) : RecyclerView.ViewHolder(v){
 
         private var view: View = v
-
-        init {
-            v.setOnClickListener(this)
-        }
 
         fun bind(product: Product){
             view.tvProductName.text = product.name
             view.tvBrand.text = product.brand_description
             view.tvSubCategory.text = product.subcategory_description
             view.tvPrice.text = product.price
+
+            initImageButtons(product)
         }
 
-        override fun onClick(v: View?) {
-            Log.d("ProductAdapter", "CLICKED")
+        private fun initImageButtons(product: Product){
+            val ibGoogle : ImageButton = view.findViewById(R.id.ibGoogleLink)
+            val ibTokped : ImageButton = view.findViewById(R.id.ibTokopediaLink)
+            val ibBL : ImageButton = view.findViewById(R.id.ibBukalapakLink)
+            val ibShopee: ImageButton = view.findViewById(R.id.ibShopeeLink)
+
+            if(product.link_toped == "" || product.link_toped == null) ibTokped.visibility = View.GONE
+            if(product.link_bukalapak == "" || product.link_bukalapak == null) ibBL.visibility = View.GONE
+            if(product.link_shopee == "" || product.link_shopee == null) ibShopee.visibility = View.GONE
+
+            ibGoogle.setOnClickListener{
+                val intent = Intent(Intent.ACTION_WEB_SEARCH).apply {
+                    putExtra(SearchManager.QUERY, product.name)
+                }
+                it.context.startActivity(intent)
+            }
         }
     }
 }
