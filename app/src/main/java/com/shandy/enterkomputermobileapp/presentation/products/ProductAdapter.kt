@@ -9,7 +9,7 @@ import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.utils.inflate
 import kotlinx.android.synthetic.main.item_product.view.*
 
-class ListProductAdapter(private val products : List<Product>?) : RecyclerView.Adapter<ListProductAdapter.ProductHolder>() {
+class ProductAdapter(private val products : List<Product>?) : RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
         val inflatedView = parent.inflate(R.layout.item_product, false)
@@ -40,7 +40,7 @@ class ListProductAdapter(private val products : List<Product>?) : RecyclerView.A
         }
 
         override fun onClick(v: View?) {
-            Log.d("ListProductAdapter", "CLICKED")
+            Log.d("ProductAdapter", "CLICKED")
         }
     }
 }

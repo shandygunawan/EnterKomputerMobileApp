@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.shandy.enterkomputermobileapp.R
+import com.shandy.enterkomputermobileapp.presentation.howto.HowToFragment
 import com.shandy.enterkomputermobileapp.presentation.products.ProductsFragment
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -18,7 +19,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      *                          VARIABLES                        *
      *************************************************************/
     private lateinit var toolbar: Toolbar
-    private lateinit var productsFragment: ProductsFragment
 
     /*************************************************************
      *                          LIFECYCLE                        *
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         /* Initialize Navigation Drawer */
         initNavigationDrawer()
 
-        initFragment("products")
+        setFragment("products")
     }
 
     /*************************************************************
@@ -89,13 +89,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.navProducts -> initFragment("products")
+            R.id.navProducts -> setFragment("products")
             R.id.navSimulation -> {
 
             }
-            R.id.navHowTo -> {
-
-            }
+            R.id.navHowTo -> setFragment("howto")
             R.id.navTips -> {
 
             }
@@ -111,11 +109,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     /*************************************************************
      *                          FRAGMENTS                        *
      *************************************************************/
-    private fun initFragment(mode: String){
+    private fun setFragment(mode: String){
         when(mode) {
             "products" -> {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.layoutMain, ProductsFragment())
+                    .commit()
+            }
+            "howto" -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.layoutMain, HowToFragment())
                     .commit()
             }
             else ->{

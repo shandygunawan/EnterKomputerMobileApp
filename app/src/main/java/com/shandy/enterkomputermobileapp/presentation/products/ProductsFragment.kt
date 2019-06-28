@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,13 +19,13 @@ import kotlinx.android.synthetic.main.fragment_products.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class ProductsFragment : Fragment(), ListProductsView {
+class ProductsFragment : Fragment(), ProductsView {
 
     /*************************************************************
      *                          VARIABLES                        *
      *************************************************************/
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var adapter: ListProductAdapter
+    private lateinit var adapter: ProductAdapter
     private var products: List<Product>? = null
 
 
@@ -93,7 +92,7 @@ class ProductsFragment : Fragment(), ListProductsView {
 
             uiThread {
                 adapter =
-                    ListProductAdapter(
+                    ProductAdapter(
                         products
                     )
                 rvListProducts.adapter = adapter
