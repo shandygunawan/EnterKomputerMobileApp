@@ -3,6 +3,7 @@ package com.shandy.enterkomputermobileapp.presentation.products
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +28,6 @@ class ProductsFragment : Fragment(), ProductsView {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: ProductAdapter
     private var products: List<Product>? = null
-
 
     /*************************************************************
      *                          LIFECYCLE                        *
@@ -80,13 +80,13 @@ class ProductsFragment : Fragment(), ProductsView {
                 .create(ProductEndpoints::class.java)
 
             when(category){
-                Constants.Products.PRODUCT_ACCESSORIES -> products = webServices.getListAccessories().execute().body()
-                Constants.Products.PRODUCT_AIO -> products = webServices.getListAIO().execute().body()
-                Constants.Products.PRODUCT_CASING -> products = webServices.getListCasing().execute().body()
-                Constants.Products.PRODUCT_COOLER -> products = webServices.getListCoolerFan().execute().body()
-                Constants.Products.PRODUCT_DRAWING -> products = webServices.getListDrawingTablet().execute().body()
-                Constants.Products.PRODUCT_DRONE -> products = webServices.getListDrone().execute().body()
-                Constants.Products.PRODUCT_FLASHDISK -> products = webServices.getListFlashdisk().execute().body()
+                Constants.Products.PRODUCT_ACCESSORIES -> products = webServices.getListAccessories().execute().body()?.sortedBy { it.name }
+                Constants.Products.PRODUCT_AIO -> products = webServices.getListAIO().execute().body()?.sortedBy { it.name }
+                Constants.Products.PRODUCT_CASING -> products = webServices.getListCasing().execute().body()?.sortedBy { it.name }
+                Constants.Products.PRODUCT_COOLER -> products = webServices.getListCoolerFan().execute().body()?.sortedBy { it.name }
+                Constants.Products.PRODUCT_DRAWING -> products = webServices.getListDrawingTablet().execute().body()?.sortedBy { it.name }
+                Constants.Products.PRODUCT_DRONE -> products = webServices.getListDrone().execute().body()?.sortedBy { it.name }
+                Constants.Products.PRODUCT_FLASHDISK -> products = webServices.getListFlashdisk().execute().body()?.sortedBy { it.name }
                 else -> products = null
             }
 

@@ -2,12 +2,14 @@ package com.shandy.enterkomputermobileapp.presentation.products
 
 import android.app.SearchManager
 import android.content.Intent
+import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.models.Product
+import com.shandy.enterkomputermobileapp.utils.Constants
 import com.shandy.enterkomputermobileapp.utils.inflate
 import kotlinx.android.synthetic.main.item_product.view.*
 
@@ -29,32 +31,91 @@ class ProductAdapter(private val products : List<Product>?) : RecyclerView.Adapt
     class ProductHolder(v: View) : RecyclerView.ViewHolder(v){
 
         private var view: View = v
+        private lateinit var product: Product
 
-        fun bind(product: Product){
+        fun bind(paramProduct: Product){
+            this.product = paramProduct
             view.tvProductName.text = product.name
             view.tvBrand.text = product.brand_description
             view.tvSubCategory.text = product.subcategory_description
             view.tvPrice.text = product.price
 
-            initImageButtons(product)
+            initImageButtons()
+            optimizeViews()
         }
 
-        private fun initImageButtons(product: Product){
-            val ibGoogle : ImageButton = view.findViewById(R.id.ibGoogleLink)
-            val ibTokped : ImageButton = view.findViewById(R.id.ibTokopediaLink)
-            val ibBL : ImageButton = view.findViewById(R.id.ibBukalapakLink)
-            val ibShopee: ImageButton = view.findViewById(R.id.ibShopeeLink)
+        private fun initImageButtons(){
+            if(!isLinkAvailable(Constants.ECommerces.ECOMMERCE_TOKOPEDIA)) view.ibTokopediaLink.visibility = View.GONE
+            if(!isLinkAvailable(Constants.ECommerces.ECOMMERCE_BUKALAPAK)) view.ibBukalapakLink.visibility = View.GONE
+            if(!isLinkAvailable(Constants.ECommerces.ECOMMERCE_SHOPEE)) view.ibShopeeLink.visibility = View.GONE
 
-            if(product.link_toped == "" || product.link_toped == null) ibTokped.visibility = View.GONE
-            if(product.link_bukalapak == "" || product.link_bukalapak == null) ibBL.visibility = View.GONE
-            if(product.link_shopee == "" || product.link_shopee == null) ibShopee.visibility = View.GONE
-
-            ibGoogle.setOnClickListener{
+            view.ibGoogleLink.setOnClickListener{
                 val intent = Intent(Intent.ACTION_WEB_SEARCH).apply {
                     putExtra(SearchManager.QUERY, product.name)
                 }
-                it.context.startActivity(intent)
+                if(intent.resolveActivity(view.context.packageManager) != null){
+                    it.context.startActivity(intent)
+                }
             }
+
+            view.ibTokopediaLink.setOnClickListener {
+                if(isLinkAvailable(Constants.ECommerces.ECOMMERCE_TOKOPEDIA)){
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(product.link_toped))
+                    if(intent.resolveActivity(view.context.packageManager) != null){
+                        it.context.startActivity(intent)
+                    }
+                }
+            }
+
+            view.ibBukalapakLink.setOnClickListener {
+                if(isLinkAvailable(Constants.ECommerces.ECOMMERCE_BUKALAPAK)){
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(product.link_bukalapak))
+                    if(intent.resolveActivity(view.context.packageManager) != null){
+                        it.context.startActivity(intent)
+                    }
+                }
+            }
+
+            view.ibShopeeLink.setOnClickListener {
+                if(isLinkAvailable(Constants.ECommerces.ECOMMERCE_SHOPEE)){
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(product.link_shopee))
+                    if(intent.resolveActivity(view.context.packageManager) != null){
+                        it.context.startActivity(intent)
+                    }
+                }
+            }
+        }
+
+        private fun isLinkAvailable(link: String): Boolean{
+            return when(link){
+                Constants.ECommerces.ECOMMERCE_TOKOPEDIA ->
+                    (product.link_toped != "" && product.link_toped != null)
+                Constants.ECommerces.ECOMMERCE_BUKALAPAK ->
+                    (product.link_bukalapak != "" && product.link_bukalapak != null)
+                Constants.ECommerces.ECOMMERCE_SHOPEE ->
+                    (product.link_shopee != "" && product.link_shopee != null)
+                else -> false
+            }
+        }
+
+        private fun optimizeViews(){
+            /* Optimize Image Buttons */
+            Glide.with(view).load(R.drawable.icon_google_colored)
+                .fitCenter().into(view.ibGoogleLink)
+            Glide.with(view).load(R.drawable.icon_tokopedia_colored)
+                .fitCenter().into(view.ibTokopediaLink)
+            Glide.with(view).load(R.drawable.icon_bukalapak_colored)
+                .fitCenter().into(view.ibBukalapakLink)
+            Glide.with(view).load(R.drawable.icon_shopee_colored)
+                .fitCenter().into(view.ibShopeeLink)
+
+            /* Optimize RecyclerView Holder */
+            Glide.with(view).load(R.drawable.icon_brand_colored)
+                .fitCenter().into(view.ivBrand)
+            Glide.with(view).load(R.drawable.icon_subcategory_bw)
+                .fitCenter().into(view.ivSubCategory)
+            Glide.with(view).load(R.drawable.icon_price_colored)
+                .fitCenter().into(view.ivPrice)
         }
     }
 }

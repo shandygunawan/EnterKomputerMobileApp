@@ -29,5 +29,11 @@ object Constants {
         const val PRODUCT_FLASHDISK = "flashdisk"
     }
 
+    object ECommerces {
+        const val ECOMMERCE_TOKOPEDIA = "Tokopedia"
+        const val ECOMMERCE_BUKALAPAK = "Bukalapak"
+        const val ECOMMERCE_SHOPEE = "Shopee"
+    }
+
 }
 

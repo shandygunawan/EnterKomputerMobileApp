@@ -6,13 +6,13 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="0dp"
     android:layout_marginBottom="0dp"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="4dp"
-    app:cardMaxElevation="10dp"
+    android:layout_marginStart="@dimen/_5sdp"
+    android:layout_marginEnd="@dimen/_5sdp"
+    app:cardCornerRadius="@dimen/_5sdp"
+    app:cardElevation="@dimen/_4sdp"
+    app:cardMaxElevation="@dimen/_10sdp"
     app:cardUseCompatPadding="true"
-    app:contentPadding="10dp">
+    app:contentPadding="@dimen/_10sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -30,18 +30,18 @@
         <View
             android:id="@+id/lineProductName"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="@dimen/_2sdp"
             android:background="#c0c0c0"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintTop_toBottomOf="@id/tvProductName"
             app:layout_constraintLeft_toLeftOf="parent" />
 
         <!-- Brand -->
         <ImageView
             android:id="@+id/ivBrand"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:src="@drawable/icon_brand_colored"
             app:layout_constraintTop_toBottomOf="@id/lineProductName"
             app:layout_constraintLeft_toLeftOf="parent" />
@@ -50,7 +50,7 @@
             android:id="@+id/tvBrand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/_5sdp"
             android:text="Brand Name"
             app:layout_constraintTop_toTopOf="@id/ivBrand"
             app:layout_constraintBottom_toBottomOf="@id/ivBrand"
@@ -59,9 +59,9 @@
         <!--Sub Category-->
         <ImageView
             android:id="@+id/ivSubCategory"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:src="@drawable/icon_subcategory_bw"
             app:layout_constraintTop_toBottomOf="@id/ivBrand"
             app:layout_constraintLeft_toLeftOf="parent" />
@@ -70,7 +70,7 @@
             android:id="@+id/tvSubCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/_5sdp"
             android:text="SubCategory"
             app:layout_constraintTop_toTopOf="@id/ivSubCategory"
             app:layout_constraintBottom_toBottomOf="@id/ivSubCategory"
@@ -79,9 +79,9 @@
         <!-- Price -->
         <ImageView
             android:id="@+id/ivPrice"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:src="@drawable/icon_price_colored"
             app:layout_constraintTop_toBottomOf="@id/ivSubCategory"
             app:layout_constraintLeft_toLeftOf="parent"/>
@@ -90,7 +90,7 @@
             android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/_5sdp"
             android:text="Price"
             app:layout_constraintTop_toTopOf="@id/ivPrice"
             app:layout_constraintBottom_toBottomOf="@id/ivPrice"
