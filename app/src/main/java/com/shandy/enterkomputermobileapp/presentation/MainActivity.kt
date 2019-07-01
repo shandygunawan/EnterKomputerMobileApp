@@ -1,8 +1,10 @@
 package com.shandy.enterkomputermobileapp.presentation
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
+import android.view.WindowManager
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -12,6 +14,7 @@ import com.google.android.material.navigation.NavigationView
 import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.presentation.howto.HowToFragment
 import com.shandy.enterkomputermobileapp.presentation.products.ProductsFragment
+import com.shandy.enterkomputermobileapp.utils.Constants
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -19,6 +22,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      *                          VARIABLES                        *
      *************************************************************/
     private lateinit var toolbar: Toolbar
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
 
     /*************************************************************
      *                          LIFECYCLE                        *
@@ -33,7 +38,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         /* Initialize Navigation Drawer */
         initNavigationDrawer()
 
-        setFragment("products")
+        window.setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED)
+
+        setFragment(Constants.Navigation.NAVIGATION_PRODUCTS)
     }
 
     /*************************************************************
@@ -70,7 +78,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      *************************************************************/
 
     private fun initNavigationDrawer(){
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        drawerLayout = findViewById(R.id.drawer_layout)
         val toggle = ActionBarDrawerToggle(
             this,
             drawerLayout,
@@ -81,27 +89,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        val navView: NavigationView = findViewById(R.id.nvMain)
+        navView = findViewById(R.id.nvMain)
         navView.setNavigationItemSelectedListener(this)
         navView.setCheckedItem(R.id.navProducts)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
-        when (item.itemId) {
-            R.id.navProducts -> setFragment("products")
-            R.id.navSimulation -> {
-
+        Handler().postDelayed({
+            run {
+                when (item.itemId) {
+                    R.id.navProducts -> setFragment(Constants.Navigation.NAVIGATION_PRODUCTS)
+                    R.id.navSimulation -> {}
+                    R.id.navHowTo -> setFragment(Constants.Navigation.NAVIGATION_HOW_TO)
+                    R.id.navTips -> {}
+                    R.id.navOrderTracking -> { }
+                }
             }
-            R.id.navHowTo -> setFragment("howto")
-            R.id.navTips -> {
+        }, 200)
 
-            }
-            R.id.navOrderTracking -> {
-
-            }
-        }
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
@@ -111,16 +117,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      *************************************************************/
     private fun setFragment(mode: String){
         when(mode) {
-            "products" -> {
+            Constants.Navigation.NAVIGATION_HOME -> {}
+            Constants.Navigation.NAVIGATION_PRODUCTS -> {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.layoutMain, ProductsFragment())
                     .commit()
             }
-            "howto" -> {
+            Constants.Navigation.NAVIGATION_SIMULATION -> {}
+            Constants.Navigation.NAVIGATION_HOW_TO -> {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.layoutMain, HowToFragment())
                     .commit()
             }
+            Constants.Navigation.NAVIGATION_TIPS -> {}
+            Constants.Navigation.NAVIGATION_ORDER_TRACKING -> {}
             else ->{
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.layoutMain, ProductsFragment())

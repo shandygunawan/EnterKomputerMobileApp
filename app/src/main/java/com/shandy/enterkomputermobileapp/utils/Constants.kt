@@ -1,5 +1,7 @@
 package com.shandy.enterkomputermobileapp.utils
 
+import com.shandy.enterkomputermobileapp.R
+
 object Constants {
 
     object Endpoints {
@@ -33,6 +35,27 @@ object Constants {
         const val ECOMMERCE_TOKOPEDIA = "Tokopedia"
         const val ECOMMERCE_BUKALAPAK = "Bukalapak"
         const val ECOMMERCE_SHOPEE = "Shopee"
+    }
+
+    object Navigation {
+        const val NAVIGATION_HOME = "home"
+        const val NAVIGATION_PRODUCTS = "products"
+        const val NAVIGATION_SIMULATION = "simulation"
+        const val NAVIGATION_HOW_TO = "how_to"
+        const val NAVIGATION_TIPS = "tips"
+        const val NAVIGATION_ORDER_TRACKING = "order_tracking"
+    }
+
+    object Lists {
+        val LIST_PRODUCTS = listOf(
+            R.drawable.icon_accessories_bw,
+            R.drawable.icon_aio_bw,
+            R.drawable.icon_casing_bw,
+            R.drawable.icon_cooler_bw,
+            R.drawable.icon_drawing_bw,
+            R.drawable.icon_drone_bw,
+            R.drawable.icon_flashdisk_bw
+        )
     }
 
 }

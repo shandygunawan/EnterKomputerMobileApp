@@ -1,9 +1,9 @@
 package com.shandy.enterkomputermobileapp.presentation.products
 
 import android.content.res.ColorStateList
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +16,7 @@ import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.network.Endpoints.ProductEndpoints
 import com.shandy.enterkomputermobileapp.network.RetrofitClient
 import com.shandy.enterkomputermobileapp.utils.Constants
+import com.shandy.enterkomputermobileapp.utils.image.ImageLoader
 import kotlinx.android.synthetic.main.fragment_products.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -116,8 +117,14 @@ class ProductsFragment : Fragment(), ProductsView {
 
         for(i in 0..tabLayoutListProducts.tabCount){
             val tab = tabLayoutListProducts.getTabAt(i)
-            var icon = tab?.icon
 
+            /* Optmize Icons */
+            tab?.icon = BitmapDrawable(resources, ImageLoader.decodeSampledBitmapFromResource(
+                resources, Constants.Lists.LIST_PRODUCTS[i], R.dimen._30sdp, R.dimen._30sdp)
+            )
+
+            /* Change Icon color tint to colorPrimary when selected */
+            var icon = tab?.icon
             if(icon != null){
                 icon = DrawableCompat.wrap(icon)
                 DrawableCompat.setTintList(icon, colors)
