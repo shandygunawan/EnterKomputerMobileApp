@@ -42,6 +42,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED)
 
         setFragment(Constants.Navigation.NAVIGATION_PRODUCTS)
+
+
     }
 
     /*************************************************************
