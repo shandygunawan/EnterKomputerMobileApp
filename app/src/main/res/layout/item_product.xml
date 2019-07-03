@@ -62,7 +62,7 @@
             android:layout_width="@dimen/_24sdp"
             android:layout_height="@dimen/_24sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:src="@drawable/icon_subcategory_bw"
+            android:src="@drawable/icon_subcategory_black"
             app:layout_constraintTop_toBottomOf="@id/ivBrand"
             app:layout_constraintLeft_toLeftOf="parent" />
 

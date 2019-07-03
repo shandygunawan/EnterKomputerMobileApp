@@ -79,7 +79,7 @@ class ProductsFragment : Fragment(), ProductsView {
             val webServices = RetrofitClient()
                 .getInstance(Constants.URLS.URL_PRODUCT_BASE)
                 .create(ProductEndpoints::class.java)
-
+2
             when(category){
                 Constants.Products.PRODUCT_ACCESSORIES -> products = webServices.getListAccessories().execute().body()?.sortedBy { it.name }
                 Constants.Products.PRODUCT_AIO -> products = webServices.getListAIO().execute().body()?.sortedBy { it.name }

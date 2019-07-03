@@ -3,25 +3,29 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/navHome"
+            android:icon="@drawable/ic_home_black"
+            android:title="@string/nav_menu_home"/>
+        <item
             android:id="@+id/navProducts"
-            android:icon="@drawable/icon_products_bw"
-            android:title="Products" />
+            android:icon="@drawable/icon_products_black"
+            android:title="@string/nav_menu_products" />
         <item
             android:id="@+id/navSimulation"
-            android:icon="@drawable/icon_aio_bw"
-            android:title="Simulation" />
+            android:icon="@drawable/icon_aio_black"
+            android:title="@string/nav_menu_simulation" />
         <item
             android:id="@+id/navHowTo"
-            android:icon="@drawable/icon_questionmark_bw"
-            android:title="How to" />
+            android:icon="@drawable/icon_questionmark_black"
+            android:title="@string/nav_menu_how_to" />
         <item
             android:id="@+id/navTips"
-            android:icon="@drawable/icon_i_bw"
-            android:title="Tips" />
+            android:icon="@drawable/icon_i_black"
+            android:title="@string/nav_menu_tips" />
         <item
             android:id="@+id/navOrderTracking"
-            android:icon="@drawable/icon_magnifier_bw"
-            android:title="Order Tracking" />
+            android:icon="@drawable/icon_magnifier_black"
+            android:title="@string/nav_menu_order_tracking" />
     </group>
 
 </menu>

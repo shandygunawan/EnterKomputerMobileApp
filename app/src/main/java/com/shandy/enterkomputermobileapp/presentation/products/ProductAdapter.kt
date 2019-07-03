@@ -112,7 +112,7 @@ class ProductAdapter(private val products : List<Product>?) : RecyclerView.Adapt
             /* Optimize RecyclerView Holder */
             Glide.with(view).load(R.drawable.icon_brand_colored)
                 .fitCenter().into(view.ivBrand)
-            Glide.with(view).load(R.drawable.icon_subcategory_bw)
+            Glide.with(view).load(R.drawable.icon_subcategory_black)
                 .fitCenter().into(view.ivSubCategory)
             Glide.with(view).load(R.drawable.icon_price_colored)
                 .fitCenter().into(view.ivPrice)

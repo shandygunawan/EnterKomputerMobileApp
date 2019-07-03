@@ -4,12 +4,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/navBottomWebsite"
-            android:icon="@drawable/icon_website_bw"
+            android:icon="@drawable/icon_website_black"
             android:title="Order via Website"/>
 
         <item
             android:id="@+id/navBottomWA"
-            android:icon="@drawable/icon_whatsapp_bw"
+            android:icon="@drawable/icon_whatsapp_black"
             android:title="Order via WA/Email" />
     </group>
 

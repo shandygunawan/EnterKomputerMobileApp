@@ -48,13 +48,13 @@ object Constants {
 
     object Lists {
         val LIST_PRODUCTS = listOf(
-            R.drawable.icon_accessories_bw,
-            R.drawable.icon_aio_bw,
-            R.drawable.icon_casing_bw,
-            R.drawable.icon_cooler_bw,
-            R.drawable.icon_drawing_bw,
-            R.drawable.icon_drone_bw,
-            R.drawable.icon_flashdisk_bw
+            R.drawable.icon_accessories_black,
+            R.drawable.icon_aio_black,
+            R.drawable.icon_casing_black,
+            R.drawable.icon_cooler_black,
+            R.drawable.icon_drawing_black,
+            R.drawable.icon_drone_black,
+            R.drawable.icon_flashdisk_black
         )
     }
 

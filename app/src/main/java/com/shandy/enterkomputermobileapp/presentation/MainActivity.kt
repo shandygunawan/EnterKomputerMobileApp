@@ -99,6 +99,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         Handler().postDelayed({
             run {
                 when (item.itemId) {
+                    R.id.navHome -> {}
                     R.id.navProducts -> setFragment(Constants.Navigation.NAVIGATION_PRODUCTS)
                     R.id.navSimulation -> {}
                     R.id.navHowTo -> setFragment(Constants.Navigation.NAVIGATION_HOW_TO)
