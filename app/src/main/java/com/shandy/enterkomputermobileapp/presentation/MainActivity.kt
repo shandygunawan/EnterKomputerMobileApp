@@ -12,6 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.shandy.enterkomputermobileapp.R
+import com.shandy.enterkomputermobileapp.presentation.home.HomeFragment
 import com.shandy.enterkomputermobileapp.presentation.howto.HowToFragment
 import com.shandy.enterkomputermobileapp.presentation.products.ProductsFragment
 import com.shandy.enterkomputermobileapp.utils.Constants
@@ -101,7 +102,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         Handler().postDelayed({
             run {
                 when (item.itemId) {
-                    R.id.navHome -> {}
+                    R.id.navHome -> setFragment(Constants.Navigation.NAVIGATION_HOME)
                     R.id.navProducts -> setFragment(Constants.Navigation.NAVIGATION_PRODUCTS)
                     R.id.navSimulation -> {}
                     R.id.navHowTo -> setFragment(Constants.Navigation.NAVIGATION_HOW_TO)
@@ -120,7 +121,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      *************************************************************/
     private fun setFragment(mode: String){
         when(mode) {
-            Constants.Navigation.NAVIGATION_HOME -> {}
+            Constants.Navigation.NAVIGATION_HOME -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.layoutMain, HomeFragment())
+                    .commit()
+            }
             Constants.Navigation.NAVIGATION_PRODUCTS -> {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.layoutMain, ProductsFragment())
