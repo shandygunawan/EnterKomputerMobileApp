@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.presentation.home.HomeFragment
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var toolbar: Toolbar
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
+    private lateinit var fragmentMain: Fragment
 
     /*************************************************************
      *                          LIFECYCLE                        *
@@ -42,9 +44,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         window.setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
             WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED)
 
+        fragmentMain = Fragment()
         setFragment(Constants.Navigation.NAVIGATION_PRODUCTS)
-
-
     }
 
     /*************************************************************
@@ -120,30 +121,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      *                          FRAGMENTS                        *
      *************************************************************/
     private fun setFragment(mode: String){
+        var newFragment = Fragment()
         when(mode) {
             Constants.Navigation.NAVIGATION_HOME -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.layoutMain, HomeFragment())
-                    .commit()
+                newFragment = HomeFragment()
             }
             Constants.Navigation.NAVIGATION_PRODUCTS -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.layoutMain, ProductsFragment())
-                    .commit()
+                newFragment = ProductsFragment()
             }
             Constants.Navigation.NAVIGATION_SIMULATION -> {}
             Constants.Navigation.NAVIGATION_HOW_TO -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.layoutMain, HowToFragment())
-                    .commit()
+                newFragment = HowToFragment()
             }
             Constants.Navigation.NAVIGATION_TIPS -> {}
             Constants.Navigation.NAVIGATION_ORDER_TRACKING -> {}
             else ->{
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.layoutMain, ProductsFragment())
-                    .commit()
+                newFragment = HomeFragment()
             }
         }
+        supportFragmentManager.beginTransaction()
+            .remove(fragmentMain)
+            .replace(R.id.layoutMain, newFragment)
+            .commit()
+        fragmentMain = newFragment
     }
 }

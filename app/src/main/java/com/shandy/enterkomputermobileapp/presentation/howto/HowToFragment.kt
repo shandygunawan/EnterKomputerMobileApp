@@ -4,15 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.shandy.enterkomputermobileapp.R
+import com.shandy.enterkomputermobileapp.presentation.home.HomeFragment
+import com.shandy.enterkomputermobileapp.utils.Constants
+import kotlinx.android.synthetic.main.fragment_howto.*
+import kotlinx.android.synthetic.main.fragment_howto_website.*
 
-class HowToFragment : Fragment(), HowToView {
+class HowToFragment : Fragment() {
 
     /*************************************************************
      *                          VARIABLES                        *
      *************************************************************/
-
 
     /*************************************************************
      *                          LIFECYCLE                        *
@@ -28,26 +34,40 @@ class HowToFragment : Fragment(), HowToView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initChildFragment()
+        initBottomNav()
     }
 
     /*************************************************************
-     *                          VIEW                             *
+     *                          Fragment                         *
      *************************************************************/
-    override fun showLoading(isLoading: Boolean) {
-        if(isLoading){
+    private fun initChildFragment(){
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.layoutHowTo, HowToWebFragment())
+            ?.commit()
+    }
 
+    /*************************************************************
+     *                          BOTTOM NAV                       *
+     *************************************************************/
+    private fun initBottomNav(){
+        bottomNavHowTo.selectedItemId = R.id.navBottomWebsite
+        bottomNavHowTo.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.navBottomWebsite -> {
+                    activity?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.layoutHowTo, HowToWebFragment())
+                        ?.commit()
+                    true
+                }
+                R.id.navBottomWA -> {
+                    activity?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.layoutHowTo, HowToWebFragment())
+                        ?.commit()
+                    true
+                }
+                else -> false
+            }
         }
-        else {
-
-        }
     }
-
-    override fun showError(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showHowTo(category: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
 }

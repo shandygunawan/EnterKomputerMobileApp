@@ -7,11 +7,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.shandy.enterkomputermobileapp.R
+import com.shandy.enterkomputermobileapp.models.AnimationItem
 import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.network.Endpoints.ProductEndpoints
 import com.shandy.enterkomputermobileapp.network.RetrofitClient
@@ -49,8 +53,7 @@ class ProductsFragment : Fragment(), ProductsView {
         initTabLayout()
 
         /* Initialize RecyclerView */
-        linearLayoutManager = LinearLayoutManager(context)
-        rvListProducts.layoutManager = linearLayoutManager
+        initRecyclerView()
         showProducts(Constants.Products.PRODUCT_ACCESSORIES)
     }
 
@@ -92,12 +95,10 @@ class ProductsFragment : Fragment(), ProductsView {
             }
 
             uiThread {
-                adapter =
-                    ProductAdapter(
-                        products
-                    )
-                rvListProducts.adapter = adapter
-                showLoading(isLoading = false)
+                if(rvListProducts != null){
+                    rvListProducts.adapter = ProductAdapter(products)
+                    showLoading(isLoading = false)
+                }
             }
         }
     }
@@ -154,5 +155,13 @@ class ProductsFragment : Fragment(), ProductsView {
                 }
             }
         )
+    }
+
+    /*************************************************************
+     *                        Recycler View                      *
+     *************************************************************/
+    private fun initRecyclerView(){
+        linearLayoutManager = LinearLayoutManager(context)
+        rvListProducts.layoutManager = linearLayoutManager
     }
 }

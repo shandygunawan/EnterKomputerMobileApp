@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:padding="@dimen/_10sdp">
+    <!-- Step 1 -->
+    <LinearLayout
+        android:id="@+id/layoutHowToWeb1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
+        <ImageView
+            android:id="@+id/ivHowToIcon1"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/icon_1motherboard_colored"/>
+        <ImageView
+            android:id="@+id/ivHowToText1"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/img_howto_1"/>
+    </LinearLayout>
+
+    <!-- Step 2 -->
+    <LinearLayout
+        android:id="@+id/layoutHowToWeb2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
+        <ImageView
+            android:id="@+id/ivHowToText2"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/img_howto_2"/>
+        <ImageView
+            android:id="@+id/ivHowToIcon2"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/icon_2cpu_colored"/>
+    </LinearLayout>
+
+    <!-- Step 3 -->
+    <LinearLayout
+        android:id="@+id/layoutHowToWeb3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
+        <ImageView
+            android:id="@+id/ivHowToIcon3"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/icon_3gpu_colored"/>
+        <ImageView
+            android:id="@+id/ivHowToText3"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/img_howto_3"/>
+    </LinearLayout>
+
+    <!-- Step 4 -->
+    <LinearLayout
+        android:id="@+id/layoutHowToWeb4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
+        <ImageView
+            android:id="@+id/ivHowToText4"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/img_howto_4"/>
+        <ImageView
+            android:id="@+id/ivHowToIcon4"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/icon_4cooler_colored"/>
+    </LinearLayout>
+
+    <!-- Step 5 -->
+    <LinearLayout
+        android:id="@+id/layoutHowToWeb5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
+        <ImageView
+            android:id="@+id/ivHowToIcon5"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/icon_5psu_colored"/>
+        <ImageView
+            android:id="@+id/ivHowToText5"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/img_howto_5"/>
+    </LinearLayout>
+
+    <!-- Step 6 -->
+    <LinearLayout
+        android:id="@+id/layoutHowToWeb6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
+        <ImageView
+            android:id="@+id/ivHowToText6"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/img_howto_6"/>
+        <ImageView
+            android:id="@+id/ivHowToIcon6"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/icon_6ram_colored"/>
+    </LinearLayout>
+
+</LinearLayout>

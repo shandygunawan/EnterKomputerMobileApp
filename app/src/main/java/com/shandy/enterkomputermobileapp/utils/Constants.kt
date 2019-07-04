@@ -19,6 +19,8 @@ object Constants {
         const val URL_PRODUCT_BASE = "https://enterkomputer.com/api/product/"
         const val URL_PRODUCT_ACCESSORIES = URL_PRODUCT_BASE + "accessories.json"
         const val URL_PRODUCT_NOTEBOOK = URL_PRODUCT_BASE + "notebook.json"
+        const val URL_HOWTO_WEBSITE = "https://www.enterkomputer.com/assets/img/how-to-enterx.png"
+        const val URL_HOWTO_WAEMAIL = "https://www.enterkomputer.com/assets/img/howto2x.jpg"
     }
 
     object Products {
