@@ -7,15 +7,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.view.animation.LayoutAnimationController
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.shandy.enterkomputermobileapp.R
-import com.shandy.enterkomputermobileapp.models.AnimationItem
 import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.network.Endpoints.ProductEndpoints
 import com.shandy.enterkomputermobileapp.network.RetrofitClient
@@ -23,15 +19,15 @@ import com.shandy.enterkomputermobileapp.utils.Constants
 import com.shandy.enterkomputermobileapp.utils.image.ImageLoader
 import kotlinx.android.synthetic.main.fragment_products.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.uiThread
 
-class ProductsFragment : Fragment(), ProductsView {
+class ProductsFragment : Fragment(), ProductsView, ProductsFilterDialog.ProductsFilterDialogListener {
 
     /*************************************************************
      *                          VARIABLES                        *
      *************************************************************/
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var adapter: ProductAdapter
     private var products: List<Product>? = null
 
     /*************************************************************
@@ -52,6 +48,9 @@ class ProductsFragment : Fragment(), ProductsView {
         /* Initialize Tab Layout */
         initTabLayout()
 
+        /* Init fab */
+        initFAB()
+
         /* Initialize RecyclerView */
         initRecyclerView()
         showProducts(Constants.Products.PRODUCT_ACCESSORIES)
@@ -64,10 +63,12 @@ class ProductsFragment : Fragment(), ProductsView {
     override fun showLoading(isLoading: Boolean) {
         if(isLoading){
             rvListProducts.visibility = View.GONE
+            fabProductsFilter.hide()
             pbListProducts.visibility = View.VISIBLE
         }
         else {
             rvListProducts.visibility = View.VISIBLE
+            fabProductsFilter.show()
             pbListProducts.visibility = View.GONE
         }
     }
@@ -135,7 +136,15 @@ class ProductsFragment : Fragment(), ProductsView {
         tabLayoutListProducts.addOnTabSelectedListener(
             object: TabLayout.OnTabSelectedListener{
                 override fun onTabReselected(tab: TabLayout.Tab?) {
-
+                    when(tab?.position){
+                        0 -> showProducts(Constants.Products.PRODUCT_ACCESSORIES)
+                        1 -> showProducts(Constants.Products.PRODUCT_AIO)
+                        2 -> showProducts(Constants.Products.PRODUCT_CASING)
+                        3 -> showProducts(Constants.Products.PRODUCT_COOLER)
+                        4 -> showProducts(Constants.Products.PRODUCT_DRAWING)
+                        5 -> showProducts(Constants.Products.PRODUCT_DRONE)
+                        6 -> showProducts(Constants.Products.PRODUCT_FLASHDISK)
+                    }
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -164,4 +173,44 @@ class ProductsFragment : Fragment(), ProductsView {
         linearLayoutManager = LinearLayoutManager(context)
         rvListProducts.layoutManager = linearLayoutManager
     }
+
+    /*************************************************************
+     *                          FAB                              *
+     *************************************************************/
+    private fun initFAB(){
+        fabProductsFilter.onClick {
+            ProductsFilterDialog(this@ProductsFragment).show(fragmentManager, "Filter")
+        }
+    }
+
+    /*************************************************************
+     *                          FILTERS                          *
+     *************************************************************/
+    override fun onProductsFilterDialogPositiveClick(dialog: ProductsFilterDialog) {
+        dialog.dismiss()
+        filterProducts(dialog.getFilters())
+    }
+
+    override fun onProductsFilterDialogNegativeClick(dialog: ProductsFilterDialog) {
+        dialog.dismiss()
+    }
+
+    private fun filterProducts(filters: HashMap<String, String>){
+        showLoading(true)
+        var filteredProducts : List<Product>? = null
+        doAsync {
+            filteredProducts = products?.filter {
+                it.name.contains(filters[Constants.Filters.FILTER_PRODUCTS_NAME].toString())
+                it.brand_description.contains(filters[Constants.Filters.FILTER_PRODUCTS_BRAND].toString())
+            }
+
+            uiThread {
+                if(filteredProducts != null && rvListProducts != null){
+                    rvListProducts.adapter = ProductAdapter(filteredProducts)
+                    showLoading(false)
+                }
+            }
+        }
+    }
+
 }

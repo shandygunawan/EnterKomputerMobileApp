@@ -60,5 +60,13 @@ object Constants {
         )
     }
 
+    object Filters {
+        const val FILTER_PRODUCTS_NAME = "filter_products_name"
+        const val FILTER_PRODUCTS_BRAND = "filter_products_brand"
+        const val FILTER_PRODUCTS_SUBCATEGORY = "filter_products_subcategory"
+        const val FILTER_PRODUCTS_PRICE = "filter_products_price"
+        const val FILTER_PRODUCTS_WEIGHT = "filter_products_weight"
+    }
+
 }
 

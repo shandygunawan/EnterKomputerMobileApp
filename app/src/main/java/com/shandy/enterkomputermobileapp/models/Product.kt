@@ -2,12 +2,9 @@ package com.shandy.enterkomputermobileapp.models
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import io.objectbox.annotation.Entity
-import io.objectbox.annotation.Id
 
 @JsonClass (generateAdapter = false)
-@Entity
-data class Product(@Json(name = "id") @Id var id: Long,
+data class Product(@Json(name = "id") var id: Long,
                    @Json(name = "name") val name: String,
                    @Json(name = "details") val details: String,
                    @Json(name = "brand") val brand: String,
