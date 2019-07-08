@@ -20,5 +20,6 @@
 
     <!-- Options Menu -->
     <string name="action_settings">Settings</string>
+    <string name="all_subcategory">All SubCategory</string>
 
 </resources>

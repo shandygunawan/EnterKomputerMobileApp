@@ -2,10 +2,10 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Name -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,6 +17,7 @@
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Brand -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,6 +29,87 @@
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Sub Categories -->
+    <Spinner
+        android:id="@+id/spinnerFilterSubCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"/>
+
+    <!-- Price -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp" >
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFilterMinPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Minimum Price">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFilterMinPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:gravity="left"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="  -  "/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFilterMaxPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Maximum Price">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFilterMaxPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:gravity="right"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <!-- Links -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/_10sdp" >
+
+        <CheckBox
+            android:id="@+id/cbFilterBukalapak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bukalapak"/>
+
+        <CheckBox
+            android:id="@+id/cbFilterTokopedia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tokopedia"/>
+
+        <CheckBox
+            android:id="@+id/cbFilterShopee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Shopee"/>
+
+    </LinearLayout>
+
+    <!-- Positive & Negative Buttons -->
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_15sdp" />
@@ -52,7 +134,7 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@color/windows_blue"
+            android:background="@color/colorAccent"
             android:text="Apply"/>
 
     </LinearLayout>

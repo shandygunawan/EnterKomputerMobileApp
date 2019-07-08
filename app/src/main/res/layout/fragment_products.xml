@@ -89,12 +89,68 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
+    <TextView
+        android:id="@+id/tvProductsSort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:padding="@dimen/_8sdp"
+        android:background="#212121"
+        android:text="Sort"
+        android:textColor="#FFFF"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="@id/fabProductsSort"
+        app:layout_constraintBottom_toBottomOf="@id/fabProductsSort"
+        app:layout_constraintRight_toLeftOf="@id/fabProductsSort"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabProductsSort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_25sdp"
+        android:src="@drawable/ic_sort_by_alpha_white"
+        android:backgroundTint="@color/colorPrimary"
+        app:elevation="@dimen/_5sdp"
+        app:pressedTranslationZ="@dimen/_12sdp"
+        app:rippleColor="@color/colorAccent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/fabProductsFilter"
+        app:layout_constraintRight_toRightOf="@id/fabProductsFilter" />
+
+    <TextView
+        android:id="@+id/tvProductsFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:padding="@dimen/_8sdp"
+        android:background="#212121"
+        android:text="Filter"
+        android:textColor="#FFFF"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="@id/fabProductsFilter"
+        app:layout_constraintBottom_toBottomOf="@id/fabProductsFilter"
+        app:layout_constraintRight_toLeftOf="@id/fabProductsFilter"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabProductsFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_25sdp"
         android:src="@drawable/icon_filter_white"
+        android:backgroundTint="@color/colorPrimary"
+        app:elevation="@dimen/_5sdp"
+        app:pressedTranslationZ="@dimen/_12sdp"
+        app:rippleColor="@color/colorAccent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/fabProductsSortFilter"
+        app:layout_constraintRight_toRightOf="@id/fabProductsSortFilter" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabProductsSortFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_15sdp"
+        android:src="@drawable/icon_sortfilter_white"
         android:backgroundTint="@color/colorPrimaryDark"
         app:elevation="@dimen/_5sdp"
         app:pressedTranslationZ="@dimen/_12sdp"

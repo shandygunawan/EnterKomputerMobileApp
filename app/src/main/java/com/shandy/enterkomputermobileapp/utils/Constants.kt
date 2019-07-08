@@ -66,7 +66,32 @@ object Constants {
         const val FILTER_PRODUCTS_SUBCATEGORY = "filter_products_subcategory"
         const val FILTER_PRODUCTS_PRICE = "filter_products_price"
         const val FILTER_PRODUCTS_WEIGHT = "filter_products_weight"
+        const val FILTER_PRODUCTS_LINK_BUKALAPAK = "filter_products_link_bukalapak"
+        const val FILTER_PRODUCTS_LINK_TOKOPEDIA = "filter_products_link_tokopedia"
+        const val FILTER_PRODUCTS_LINK_SHOPEE = "filter_products_link_shopee"
     }
 
+    object States {
+        const val CHECKBOX_CHECKED = "checkbox_checked"
+        const val CHECKBOX_UNCHECKED = "checkbox_unchecked"
+    }
+
+    object Strings {
+        const val STRING_EMPTY = ""
+    }
+
+    object Separators {
+        const val SEPARATOR_COMMA = ","
+        const val SEPARATOR_SLASH = "/"
+    }
+
+    object Currency {
+        const val CURRENCY_YUAN = "CNY"
+        const val CURRENCY_DOLLAR_AUS = "UD"
+        const val CURRENCY_DOLLAR_US = "USD"
+        const val CURRENCY_EURO = "EUR"
+        const val CURRENCY_RUPIAH = "IDR"
+        const val CURRENCY_YEN = "JPY"
+    }
 }
 

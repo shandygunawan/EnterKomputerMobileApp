@@ -1,12 +1,19 @@
 package com.shandy.enterkomputermobileapp.presentation.products
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.widget.PopupMenu
+import androidx.appcompat.view.menu.MenuBuilder
+import androidx.appcompat.view.menu.MenuPopupHelper
+import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,13 +29,24 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.uiThread
 
-class ProductsFragment : Fragment(), ProductsView, ProductsFilterDialog.ProductsFilterDialogListener {
+class ProductsFragment(paramContext: Context) : Fragment(), ProductsView, ProductsFilterDialog.ProductsFilterDialogListener {
 
     /*************************************************************
      *                          VARIABLES                        *
      *************************************************************/
+    // System
+    private var con = paramContext
+
+    // RecyclerView
     private lateinit var linearLayoutManager: LinearLayoutManager
+
+    // Data
     private var products: List<Product>? = null
+    private var subCategories = ArrayList<String>()
+    // FAB
+    private var isFabOpen : Boolean = false
+    private val fab_open = AnimationUtils.loadAnimation(con, R.anim.fab_open)
+    private val fab_close = AnimationUtils.loadAnimation(con, R.anim.fab_close)
 
     /*************************************************************
      *                          LIFECYCLE                        *
@@ -63,12 +81,13 @@ class ProductsFragment : Fragment(), ProductsView, ProductsFilterDialog.Products
     override fun showLoading(isLoading: Boolean) {
         if(isLoading){
             rvListProducts.visibility = View.GONE
-            fabProductsFilter.hide()
+            if(isFabOpen == true) setFABChildren(!isFabOpen)
+            fabProductsSortFilter.hide()
             pbListProducts.visibility = View.VISIBLE
         }
         else {
             rvListProducts.visibility = View.VISIBLE
-            fabProductsFilter.show()
+            fabProductsSortFilter.show()
             pbListProducts.visibility = View.GONE
         }
     }
@@ -80,10 +99,10 @@ class ProductsFragment : Fragment(), ProductsView, ProductsFilterDialog.Products
     override fun showProducts(category: String) {
         showLoading(isLoading = true)
         doAsync {
-            val webServices = RetrofitClient()
+            val webServices = RetrofitClient
                 .getInstance(Constants.URLS.URL_PRODUCT_BASE)
                 .create(ProductEndpoints::class.java)
-2
+
             when(category){
                 Constants.Products.PRODUCT_ACCESSORIES -> products = webServices.getListAccessories().execute().body()?.sortedBy { it.name }
                 Constants.Products.PRODUCT_AIO -> products = webServices.getListAIO().execute().body()?.sortedBy { it.name }
@@ -93,6 +112,19 @@ class ProductsFragment : Fragment(), ProductsView, ProductsFilterDialog.Products
                 Constants.Products.PRODUCT_DRONE -> products = webServices.getListDrone().execute().body()?.sortedBy { it.name }
                 Constants.Products.PRODUCT_FLASHDISK -> products = webServices.getListFlashdisk().execute().body()?.sortedBy { it.name }
                 else -> products = null
+            }
+
+            if(products != null){
+                val isSubCatInserted = HashMap<String, Boolean>()
+                subCategories.add(getString(R.string.all_subcategory))
+                for(product in products!!){
+                    if(product.subcategory_description != Constants.Strings.STRING_EMPTY &&
+                        (isSubCatInserted[product.subcategory_description] != true
+                                || isSubCatInserted[product.subcategory_description] == null)){
+                        subCategories.add(product.subcategory_description)
+                        isSubCatInserted[product.subcategory_description] = true
+                    }
+                }
             }
 
             uiThread {
@@ -177,9 +209,35 @@ class ProductsFragment : Fragment(), ProductsView, ProductsFilterDialog.Products
     /*************************************************************
      *                          FAB                              *
      *************************************************************/
+    private fun setFABChildren(isOn: Boolean){
+        if(isOn){
+            tvProductsFilter.visibility = View.VISIBLE
+            tvProductsSort.visibility = View.VISIBLE
+            fabProductsSort.startAnimation(fab_open)
+            fabProductsFilter.startAnimation(fab_open)
+            fabProductsSort.isClickable = true
+            fabProductsFilter.isClickable = true
+            isFabOpen = true
+        }
+        else {
+            tvProductsFilter.visibility = View.INVISIBLE
+            tvProductsSort.visibility = View.INVISIBLE
+            fabProductsSort.startAnimation(fab_close)
+            fabProductsFilter.startAnimation(fab_close)
+            fabProductsSort.isClickable = false
+            fabProductsFilter.isClickable = false
+            isFabOpen = false
+        }
+    }
+
     private fun initFAB(){
-        fabProductsFilter.onClick {
-            ProductsFilterDialog(this@ProductsFragment).show(fragmentManager, "Filter")
+        fabProductsSortFilter.onClick {
+            setFABChildren(!isFabOpen)
+        }
+
+        fabProductsFilter.setOnClickListener {
+            ProductsFilterDialog(this@ProductsFragment,
+                products, subCategories).show(fragmentManager, "Filter")
         }
     }
 
@@ -195,14 +253,88 @@ class ProductsFragment : Fragment(), ProductsView, ProductsFilterDialog.Products
         dialog.dismiss()
     }
 
+    private fun filterName(name: String?, toFilter: List<Product>?): List<Product>?{
+        if(name == null) return toFilter
+        return toFilter?.filter {
+            it.name.contains(name.toString())
+        } ?: products?.filter {
+            it.name.contains(name.toString())
+        }
+    }
+
+    private fun filterBrand(brand: String?, toFilter: List<Product>?): List<Product>?{
+        if(brand == null) return toFilter
+        return toFilter?.filter {
+            it.brand_description.contains(brand.toString())
+        } ?: products?.filter {
+            it.brand_description.contains(brand.toString())
+        }
+    }
+
+    private fun filterSubCategory(subcat: String?, toFilter: List<Product>?): List<Product>?{
+        if(subcat == getString(R.string.all_subcategory)) return toFilter
+        return toFilter?.filter {
+            it.subcategory_description.contains(subcat.toString())
+        } ?: products?.filter {
+            it.subcategory_description.contains(subcat.toString())
+        }
+    }
+
+    private fun filterPrice(price: String?, toFilter: List<Product>?): List<Product>? {
+        if(price == null) return toFilter
+
+        val prices = price.split(Constants.Separators.SEPARATOR_COMMA)
+        val minPrice = prices.first().toInt()
+        val maxPrice = prices.last().toInt()
+
+        return toFilter?.filter {
+            it.price.toInt() in minPrice..maxPrice
+        } ?: products?.filter {
+            it.price.toInt() in minPrice..maxPrice
+        }
+    }
+
+    private fun filterLink(state: String?, link: String, toFilter: List<Product>?): List<Product>? {
+        if(state == Constants.States.CHECKBOX_UNCHECKED) return toFilter
+        return when (link) {
+            Constants.ECommerces.ECOMMERCE_TOKOPEDIA -> toFilter?.filter {
+                !it.link_toped.isNullOrBlank()
+            } ?: products?.filter {
+                !it.link_toped.isNullOrBlank()
+            }
+            Constants.ECommerces.ECOMMERCE_BUKALAPAK -> toFilter?.filter {
+                !it.link_bukalapak.isNullOrBlank()
+            } ?: products?.filter {
+                !it.link_bukalapak.isNullOrBlank()
+            }
+            Constants.ECommerces.ECOMMERCE_SHOPEE -> toFilter?.filter {
+                !it.link_shopee.isNullOrBlank()
+            } ?: products?.filter {
+                !it.link_shopee.isNullOrBlank()
+            }
+            else -> toFilter
+        }
+    }
+
     private fun filterProducts(filters: HashMap<String, String>){
         showLoading(true)
         var filteredProducts : List<Product>? = null
         doAsync {
-            filteredProducts = products?.filter {
-                it.name.contains(filters[Constants.Filters.FILTER_PRODUCTS_NAME].toString())
-                it.brand_description.contains(filters[Constants.Filters.FILTER_PRODUCTS_BRAND].toString())
-            }
+            filteredProducts = filterName(filters[Constants.Filters.FILTER_PRODUCTS_NAME],
+                filteredProducts)
+            filteredProducts = filterBrand(filters[Constants.Filters.FILTER_PRODUCTS_BRAND],
+                filteredProducts)
+            filteredProducts = filterSubCategory(filters[Constants.Filters.FILTER_PRODUCTS_SUBCATEGORY],
+                filteredProducts)
+            filteredProducts = filterPrice(filters[Constants.Filters.FILTER_PRODUCTS_PRICE],
+                filteredProducts)
+            filteredProducts = filterLink(filters[Constants.Filters.FILTER_PRODUCTS_LINK_TOKOPEDIA],
+                Constants.ECommerces.ECOMMERCE_TOKOPEDIA, filteredProducts)
+            filteredProducts = filterLink(filters[Constants.Filters.FILTER_PRODUCTS_LINK_BUKALAPAK],
+                Constants.ECommerces.ECOMMERCE_BUKALAPAK, filteredProducts)
+            filteredProducts = filterLink(filters[Constants.Filters.FILTER_PRODUCTS_LINK_SHOPEE],
+                Constants.ECommerces.ECOMMERCE_SHOPEE, filteredProducts)
+
 
             uiThread {
                 if(filteredProducts != null && rvListProducts != null){

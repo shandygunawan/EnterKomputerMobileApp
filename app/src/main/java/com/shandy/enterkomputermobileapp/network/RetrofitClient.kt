@@ -4,7 +4,7 @@ import com.squareup.moshi.Moshi
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class RetrofitClient {
+object RetrofitClient {
     fun getInstance(url: String) =
         Retrofit.Builder()
             .baseUrl(url)

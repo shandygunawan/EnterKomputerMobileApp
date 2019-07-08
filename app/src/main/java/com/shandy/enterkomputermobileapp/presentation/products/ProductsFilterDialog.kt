@@ -3,22 +3,31 @@ package com.shandy.enterkomputermobileapp.presentation.products
 import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.shandy.enterkomputermobileapp.R
+import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.utils.Constants
+import com.shandy.enterkomputermobileapp.utils.string.CurrencyFormatter
 import kotlinx.android.synthetic.main.dialog_filter_products.view.*
+import org.jetbrains.anko.sdk27.coroutines.onCheckedChange
 
-class ProductsFilterDialog(paramFrag: ProductsFragment) : DialogFragment(){
+class ProductsFilterDialog(paramFrag: ProductsFragment, paramProducts: List<Product>?,
+                           paramSubCats: ArrayList<String>) : DialogFragment(){
 
     /*************************************************************
      *                          VARIABLES                        *
      *************************************************************/
     private val frag: ProductsFragment = paramFrag
+    private val subCategories: List<String> = paramSubCats
+    private var filters = HashMap<String, String>()
     private lateinit var v : View
     private lateinit var listener: ProductsFilterDialogListener
-    private lateinit var filters: HashMap<String, String>
 
     /*************************************************************
      *                          INTERFACES                        *
@@ -59,6 +68,17 @@ class ProductsFilterDialog(paramFrag: ProductsFragment) : DialogFragment(){
     }
 
     /*************************************************************
+     *                       SETTER/GETTER                       *
+     *************************************************************/
+    fun getFilters() : HashMap<String, String>{
+        return filters
+    }
+
+    private fun setFilter(key: String, value: String){
+        filters[key] = value
+    }
+
+    /*************************************************************
      *                          INITs                            *
      *************************************************************/
     private fun initLayout(){
@@ -67,26 +87,155 @@ class ProductsFilterDialog(paramFrag: ProductsFragment) : DialogFragment(){
     }
 
     private fun initViews(){
+        initPositiveNegativeButtons()
+        initTILs()
+        initSpinners()
+        initCheckboxes()
+    }
+
+    private fun initPositiveNegativeButtons(){
         v.tvFilterApply.setOnClickListener {
-            setFilters()
-            listener.onProductsFilterDialogPositiveClick(this)
+            if(isInputsCorrect()) listener.onProductsFilterDialogPositiveClick(this)
         }
         v.tvFilterCancel.setOnClickListener {
             listener.onProductsFilterDialogNegativeClick(this)
         }
     }
 
+    private fun initTILs(){
+        v.etFilterName.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {}
 
-    /*************************************************************
-     *                       SETTER/GETTER                       *
-     *************************************************************/
-    fun getFilters() : HashMap<String, String>{
-        return filters
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                setFilter(Constants.Filters.FILTER_PRODUCTS_NAME, s.toString())
+            }
+        })
+
+        v.etFilterBrand.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                setFilter(Constants.Filters.FILTER_PRODUCTS_BRAND, s.toString())
+            }
+        })
+
+        v.etFilterMinPrice.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                v.tilFilterMinPrice.isErrorEnabled = false
+                setFilter(Constants.Filters.FILTER_PRODUCTS_PRICE,
+                    s.toString() + Constants.Separators.SEPARATOR_COMMA + v.etFilterMaxPrice.text.toString())
+            }
+        })
+
+        v.etFilterMaxPrice.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                v.tilFilterMaxPrice.isErrorEnabled = false
+                setFilter(Constants.Filters.FILTER_PRODUCTS_PRICE,
+                    v.etFilterMinPrice.text.toString() + Constants.Separators.SEPARATOR_COMMA + s.toString())
+            }
+        })
     }
 
-    private fun setFilters(){
-        filters = HashMap()
-        filters[Constants.Filters.FILTER_PRODUCTS_NAME] = v.etFilterName.text.toString()
-        filters[Constants.Filters.FILTER_PRODUCTS_BRAND] = v.etFilterBrand.text.toString()
+    private fun initSpinners(){
+        v.spinnerFilterSubCategory.adapter =
+            ArrayAdapter<String>(frag.context,
+                android.R.layout.simple_dropdown_item_1line, subCategories)
+
+        v.spinnerFilterSubCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do Nothing
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selection = parent?.getItemAtPosition(position)
+                setFilter(Constants.Filters.FILTER_PRODUCTS_SUBCATEGORY, selection.toString())
+            }
+        }
+    }
+
+    private fun initCheckboxes(){
+        setFilter(Constants.Filters.FILTER_PRODUCTS_LINK_BUKALAPAK,
+            Constants.States.CHECKBOX_UNCHECKED)
+        setFilter(Constants.Filters.FILTER_PRODUCTS_LINK_TOKOPEDIA,
+            Constants.States.CHECKBOX_UNCHECKED)
+        setFilter(Constants.Filters.FILTER_PRODUCTS_LINK_SHOPEE,
+            Constants.States.CHECKBOX_UNCHECKED)
+        v.cbFilterBukalapak.onCheckedChange { _, isChecked ->
+            if(isChecked) {
+                setFilter(Constants.Filters.FILTER_PRODUCTS_LINK_BUKALAPAK,
+                    Constants.States.CHECKBOX_CHECKED)
+            }
+            else {
+                setFilter(Constants.Filters.FILTER_PRODUCTS_LINK_BUKALAPAK,
+                    Constants.States.CHECKBOX_UNCHECKED)
+            }
+        }
+
+        v.cbFilterTokopedia.onCheckedChange { _, isChecked ->
+            if(isChecked) {
+                setFilter(Constants.Filters.FILTER_PRODUCTS_LINK_TOKOPEDIA,
+                    Constants.States.CHECKBOX_CHECKED)
+            }
+            else {
+                setFilter(Constants.Filters.FILTER_PRODUCTS_LINK_TOKOPEDIA,
+                    Constants.States.CHECKBOX_UNCHECKED)
+            }
+        }
+
+        v.cbFilterShopee.onCheckedChange { _, isChecked ->
+            if(isChecked) {
+                setFilter(Constants.Filters.FILTER_PRODUCTS_LINK_SHOPEE,
+                    Constants.States.CHECKBOX_CHECKED)
+            }
+            else {
+                setFilter(Constants.Filters.FILTER_PRODUCTS_LINK_SHOPEE,
+                    Constants.States.CHECKBOX_UNCHECKED)
+            }
+        }
+    }
+
+    /*************************************************************
+     *                          CHECKS                           *
+     *************************************************************/
+    private fun isInputsCorrect() : Boolean{
+        // Check prices (min and max)
+        val minPrice = v.etFilterMinPrice.text.toString()
+        val maxPrice = v.etFilterMaxPrice.text.toString()
+        if(minPrice == Constants.Strings.STRING_EMPTY && maxPrice == Constants.Strings.STRING_EMPTY){
+            return true
+        }
+        if(minPrice == Constants.Strings.STRING_EMPTY && maxPrice != Constants.Strings.STRING_EMPTY){
+            v.tilFilterMinPrice.error = "Field should be filled"
+            v.tilFilterMinPrice.isErrorEnabled = true
+            return false
+        }
+        if(minPrice != Constants.Strings.STRING_EMPTY && maxPrice == Constants.Strings.STRING_EMPTY){
+            v.tilFilterMaxPrice.error = "Field should be filled"
+            v.tilFilterMaxPrice.isErrorEnabled = true
+            return false
+        }
+        if(minPrice.toInt() > maxPrice.toInt()){
+            v.tilFilterMaxPrice.error = "Number should be bigger"
+            v.tilFilterMaxPrice.isErrorEnabled = true
+            return false
+        }
+        return true
     }
 }

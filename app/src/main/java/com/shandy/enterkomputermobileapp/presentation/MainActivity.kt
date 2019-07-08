@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 newFragment = HomeFragment()
             }
             Constants.Navigation.NAVIGATION_PRODUCTS -> {
-                newFragment = ProductsFragment()
+                newFragment = ProductsFragment(applicationContext)
             }
             Constants.Navigation.NAVIGATION_SIMULATION -> {}
             Constants.Navigation.NAVIGATION_HOW_TO -> {

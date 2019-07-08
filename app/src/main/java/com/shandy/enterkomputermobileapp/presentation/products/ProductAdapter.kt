@@ -11,6 +11,7 @@ import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.utils.Constants
 import com.shandy.enterkomputermobileapp.utils.inflate
+import com.shandy.enterkomputermobileapp.utils.string.CurrencyFormatter
 import kotlinx.android.synthetic.main.item_product.view.*
 
 class ProductAdapter(private val products : List<Product>?) : RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
@@ -38,7 +39,7 @@ class ProductAdapter(private val products : List<Product>?) : RecyclerView.Adapt
             view.tvProductName.text = product.name
             view.tvBrand.text = product.brand_description
             view.tvSubCategory.text = product.subcategory_description
-            view.tvPrice.text = product.price
+            view.tvPrice.text = CurrencyFormatter.getIDRCurrencyFormat( product.price.toInt())
 
             initImageButtons()
             optimizeViews()
