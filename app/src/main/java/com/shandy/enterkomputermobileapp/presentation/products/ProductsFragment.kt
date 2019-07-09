@@ -113,10 +113,9 @@ class ProductsFragment(paramContext: Context) : Fragment(), ProductsView, Produc
                 Constants.Products.PRODUCT_FLASHDISK -> products = webServices.getListFlashdisk().execute().body()?.sortedBy { it.name }
                 else -> products = null
             }
-
+            subCategories.clear()
             if(products != null){
                 val isSubCatInserted = HashMap<String, Boolean>()
-                subCategories.add(getString(R.string.all_subcategory))
                 for(product in products!!){
                     if(product.subcategory_description != Constants.Strings.STRING_EMPTY &&
                         (isSubCatInserted[product.subcategory_description] != true
@@ -126,6 +125,8 @@ class ProductsFragment(paramContext: Context) : Fragment(), ProductsView, Produc
                     }
                 }
             }
+            subCategories.sort()
+            subCategories.add(0, getString(R.string.all_subcategory))
 
             uiThread {
                 if(rvListProducts != null){

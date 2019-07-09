@@ -38,7 +38,14 @@ class ProductAdapter(private val products : List<Product>?) : RecyclerView.Adapt
             this.product = paramProduct
             view.tvProductName.text = product.name
             view.tvBrand.text = product.brand_description
-            view.tvSubCategory.text = product.subcategory_description
+            if(product.subcategory.isNullOrBlank() || product.subcategory_description.isNullOrBlank()){
+                view.ivSubCategory.visibility = View.GONE
+                view.tvSubCategory.visibility = View.GONE
+            }
+            else {
+                view.tvSubCategory.text = product.subcategory_description
+            }
+
             view.tvPrice.text = CurrencyFormatter.getIDRCurrencyFormat( product.price.toInt())
 
             initImageButtons()
