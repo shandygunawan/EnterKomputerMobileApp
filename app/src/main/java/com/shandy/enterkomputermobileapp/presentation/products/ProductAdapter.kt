@@ -92,6 +92,14 @@ class ProductAdapter(private val products : List<Product>?) : RecyclerView.Adapt
                     }
                 }
             }
+
+            view.ibWishlistEmpty.setOnClickListener {
+                // Add product to wishlist
+            }
+
+            view.ibWishlistFilled.setOnClickListener {
+                // Remove product from wishlist
+            }
         }
 
         private fun isLinkAvailable(link: String): Boolean{
@@ -124,6 +132,10 @@ class ProductAdapter(private val products : List<Product>?) : RecyclerView.Adapt
                 .fitCenter().into(view.ivSubCategory)
             Glide.with(view).load(R.drawable.icon_price_colored)
                 .fitCenter().into(view.ivPrice)
+            Glide.with(view).load(R.drawable.ic_favorite_border_black)
+                .fitCenter().into(view.ibWishlistEmpty)
+            Glide.with(view).load(R.drawable.ic_favorite_red)
+                .fitCenter().into(view.ibWishlistFilled)
         }
     }
 }
