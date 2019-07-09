@@ -29,7 +29,8 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.uiThread
 
-class ProductsFragment(paramContext: Context) : Fragment(), ProductsView, ProductsFilterDialog.ProductsFilterDialogListener {
+class ProductsFragment(paramContext: Context) : Fragment(), ProductsView,
+    ProductsFilterDialog.ProductsFilterDialogListener, ProductsSortDialog.ProductsSortDialogListener {
 
     /*************************************************************
      *                          VARIABLES                        *
@@ -42,6 +43,7 @@ class ProductsFragment(paramContext: Context) : Fragment(), ProductsView, Produc
 
     // Data
     private var products: List<Product>? = null
+    private var shownProducts : List<Product>? = null
     private var subCategories = ArrayList<String>()
     // FAB
     private var isFabOpen : Boolean = false
@@ -104,15 +106,19 @@ class ProductsFragment(paramContext: Context) : Fragment(), ProductsView, Produc
                 .create(ProductEndpoints::class.java)
 
             when(category){
-                Constants.Products.PRODUCT_ACCESSORIES -> products = webServices.getListAccessories().execute().body()?.sortedBy { it.name }
-                Constants.Products.PRODUCT_AIO -> products = webServices.getListAIO().execute().body()?.sortedBy { it.name }
-                Constants.Products.PRODUCT_CASING -> products = webServices.getListCasing().execute().body()?.sortedBy { it.name }
-                Constants.Products.PRODUCT_COOLER -> products = webServices.getListCoolerFan().execute().body()?.sortedBy { it.name }
-                Constants.Products.PRODUCT_DRAWING -> products = webServices.getListDrawingTablet().execute().body()?.sortedBy { it.name }
-                Constants.Products.PRODUCT_DRONE -> products = webServices.getListDrone().execute().body()?.sortedBy { it.name }
-                Constants.Products.PRODUCT_FLASHDISK -> products = webServices.getListFlashdisk().execute().body()?.sortedBy { it.name }
+                Constants.Products.PRODUCT_ACCESSORIES -> products = webServices.getListAccessories().execute().body()
+                Constants.Products.PRODUCT_AIO -> products = webServices.getListAIO().execute().body()
+                Constants.Products.PRODUCT_CASING -> products = webServices.getListCasing().execute().body()
+                Constants.Products.PRODUCT_COOLER -> products = webServices.getListCoolerFan().execute().body()
+                Constants.Products.PRODUCT_DRAWING -> products = webServices.getListDrawingTablet().execute().body()
+                Constants.Products.PRODUCT_DRONE -> products = webServices.getListDrone().execute().body()
+                Constants.Products.PRODUCT_FLASHDISK -> products = webServices.getListFlashdisk().execute().body()
                 else -> products = null
             }
+            for(product in products!!){
+                product.name = product.name.trim()
+            }
+            shownProducts = products
             subCategories.clear()
             if(products != null){
                 val isSubCatInserted = HashMap<String, Boolean>()
@@ -240,6 +246,72 @@ class ProductsFragment(paramContext: Context) : Fragment(), ProductsView, Produc
             ProductsFilterDialog(this@ProductsFragment,
                 products, subCategories).show(fragmentManager, "Filter")
         }
+
+        fabProductsSort.setOnClickListener {
+            ProductsSortDialog(this@ProductsFragment)
+                .show(fragmentManager, "Sort")
+        }
+    }
+
+    /*************************************************************
+     *                          SORTS                            *
+     *************************************************************/
+    override fun onProductsSortDialogPositiveClick(dialog: ProductsSortDialog) {
+        dialog.dismiss()
+        sortProducts(category = dialog.getSortCategory(), mode = dialog.getSortMode())
+    }
+
+    override fun onProductsSortDialogNegativeClick(dialog: ProductsSortDialog) {
+        dialog.dismiss()
+    }
+
+    private fun sortProducts(category: String, mode: String){
+        showLoading(true)
+        doAsync {
+            if(shownProducts != null){
+                if(mode == "Ascending"){
+                    when(category){
+                        "Name" -> shownProducts = shownProducts!!.sortedBy { it.name }
+                        "Brand" -> shownProducts = shownProducts!!.sortedBy { it.brand_description }
+                        "SubCategory" -> shownProducts = shownProducts!!.sortedBy { it.subcategory_description }
+                        "Price" -> shownProducts = shownProducts!!.sortedBy { it.price }
+                    }
+                }
+                else if (mode == "Descending") {
+                    when(category){
+                        "Name" -> shownProducts = shownProducts!!.sortedByDescending { it.name }
+                        "Brand" -> shownProducts = shownProducts!!.sortedByDescending { it.brand_description }
+                        "SubCategory" -> shownProducts = shownProducts!!.sortedByDescending { it.subcategory_description }
+                        "Price" -> shownProducts = shownProducts!!.sortedByDescending { it.price }
+                    }
+                }
+            }
+            else {
+                if(mode == "Ascending"){
+                    when(category){
+                        "Name" -> shownProducts = products!!.sortedBy { it.name }
+                        "Brand" -> shownProducts = products!!.sortedBy { it.brand_description }
+                        "SubCategory" -> shownProducts = products!!.sortedBy { it.subcategory_description }
+                        "Price" -> shownProducts = products!!.sortedBy { it.price }
+                    }
+                }
+                else if (mode == "Descending") {
+                    when(category){
+                        "Name" -> shownProducts = products!!.sortedByDescending { it.name }
+                        "Brand" -> shownProducts = products!!.sortedByDescending { it.brand_description }
+                        "SubCategory" -> shownProducts = products!!.sortedByDescending { it.subcategory_description }
+                        "Price" -> shownProducts = products!!.sortedByDescending { it.price }
+                    }
+                }
+            }
+
+            uiThread {
+                if(shownProducts != null && rvListProducts != null){
+                    rvListProducts.adapter = ProductAdapter(shownProducts)
+                    showLoading(false)
+                }
+            }
+        }
     }
 
     /*************************************************************
@@ -319,27 +391,25 @@ class ProductsFragment(paramContext: Context) : Fragment(), ProductsView, Produc
 
     private fun filterProducts(filters: HashMap<String, String>){
         showLoading(true)
-        var filteredProducts : List<Product>? = null
         doAsync {
-            filteredProducts = filterName(filters[Constants.Filters.FILTER_PRODUCTS_NAME],
-                filteredProducts)
-            filteredProducts = filterBrand(filters[Constants.Filters.FILTER_PRODUCTS_BRAND],
-                filteredProducts)
-            filteredProducts = filterSubCategory(filters[Constants.Filters.FILTER_PRODUCTS_SUBCATEGORY],
-                filteredProducts)
-            filteredProducts = filterPrice(filters[Constants.Filters.FILTER_PRODUCTS_PRICE],
-                filteredProducts)
-            filteredProducts = filterLink(filters[Constants.Filters.FILTER_PRODUCTS_LINK_TOKOPEDIA],
-                Constants.ECommerces.ECOMMERCE_TOKOPEDIA, filteredProducts)
-            filteredProducts = filterLink(filters[Constants.Filters.FILTER_PRODUCTS_LINK_BUKALAPAK],
-                Constants.ECommerces.ECOMMERCE_BUKALAPAK, filteredProducts)
-            filteredProducts = filterLink(filters[Constants.Filters.FILTER_PRODUCTS_LINK_SHOPEE],
-                Constants.ECommerces.ECOMMERCE_SHOPEE, filteredProducts)
-
+            shownProducts = filterName(filters[Constants.Filters.FILTER_PRODUCTS_NAME],
+                shownProducts)
+            shownProducts = filterBrand(filters[Constants.Filters.FILTER_PRODUCTS_BRAND],
+                shownProducts)
+            shownProducts = filterSubCategory(filters[Constants.Filters.FILTER_PRODUCTS_SUBCATEGORY],
+                shownProducts)
+            shownProducts = filterPrice(filters[Constants.Filters.FILTER_PRODUCTS_PRICE],
+                shownProducts)
+            shownProducts = filterLink(filters[Constants.Filters.FILTER_PRODUCTS_LINK_TOKOPEDIA],
+                Constants.ECommerces.ECOMMERCE_TOKOPEDIA, shownProducts)
+            shownProducts = filterLink(filters[Constants.Filters.FILTER_PRODUCTS_LINK_BUKALAPAK],
+                Constants.ECommerces.ECOMMERCE_BUKALAPAK, shownProducts)
+            shownProducts = filterLink(filters[Constants.Filters.FILTER_PRODUCTS_LINK_SHOPEE],
+                Constants.ECommerces.ECOMMERCE_SHOPEE, shownProducts)
 
             uiThread {
-                if(filteredProducts != null && rvListProducts != null){
-                    rvListProducts.adapter = ProductAdapter(filteredProducts)
+                if(shownProducts != null && rvListProducts != null){
+                    rvListProducts.adapter = ProductAdapter(shownProducts)
                     showLoading(false)
                 }
             }

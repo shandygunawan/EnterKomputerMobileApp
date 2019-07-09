@@ -38,7 +38,7 @@ class ProductAdapter(private val products : List<Product>?) : RecyclerView.Adapt
             this.product = paramProduct
             view.tvProductName.text = product.name
             view.tvBrand.text = product.brand_description
-            if(product.subcategory.isNullOrBlank() || product.subcategory_description.isNullOrBlank()){
+            if(product.subcategory == null || product.subcategory_description.isNullOrBlank()){
                 view.ivSubCategory.visibility = View.GONE
                 view.tvSubCategory.visibility = View.GONE
             }

@@ -71,6 +71,15 @@ object Constants {
         const val FILTER_PRODUCTS_LINK_SHOPEE = "filter_products_link_shopee"
     }
 
+    object Sort {
+        const val SORT_PRODUCT_NAME = "Name"
+        const val SORT_PRODUCT_BRAND = "Brand"
+        const val SORT_PRODUCT_SUBCATEGORY = "Subcategory"
+        const val SORT_PRODUCT_PRICE = "Price"
+        const val SORT_MODE_ASC = "Ascending"
+        const val SORT_MODE_DESC = "Descending"
+    }
+
     object States {
         const val CHECKBOX_CHECKED = "checkbox_checked"
         const val CHECKBOX_UNCHECKED = "checkbox_unchecked"

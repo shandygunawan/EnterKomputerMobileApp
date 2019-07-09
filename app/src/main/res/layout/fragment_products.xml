@@ -8,15 +8,15 @@
     tools:context=".presentation.MainActivity">
 
     <com.google.android.material.tabs.TabLayout
-        style="@style/TabLayoutTheme"
         android:id="@+id/tabLayoutListProducts"
+        style="@style/TabLayoutTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/colorPrimary"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/colorPrimary">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabProductAccessories"
@@ -30,28 +30,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/icon_aio_black"
-            android:text="All in One"/>
+            android:text="All in One" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabProductCasing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/icon_casing_black"
-            android:text="Casing"/>
+            android:text="Casing" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabProductCoolerFan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/icon_cooler_black"
-            android:text="Cooler Fan"/>
+            android:text="Cooler Fan" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabProductDrawing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/icon_drawing_black"
-            android:text="Drawing"/>
+            android:text="Drawing" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabProductDrone"
@@ -65,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/icon_flashdisk_black"
-            android:text="Flashdisk"/>
+            android:text="Flashdisk" />
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -74,89 +74,90 @@
         android:layout_height="wrap_content"
         android:paddingBottom="?attr/actionBarSize"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@id/tabLayoutListProducts"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayoutListProducts"/>
 
     <ProgressBar
         android:id="@+id/pbListProducts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="@id/tabLayoutListProducts"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tabLayoutListProducts" />
 
     <TextView
         android:id="@+id/tvProductsSort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:padding="@dimen/_8sdp"
         android:background="#212121"
+        android:padding="@dimen/_8sdp"
         android:text="Sort"
         android:textColor="#FFFF"
         android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="@id/fabProductsSort"
         app:layout_constraintBottom_toBottomOf="@id/fabProductsSort"
-        app:layout_constraintRight_toLeftOf="@id/fabProductsSort"/>
+        app:layout_constraintRight_toLeftOf="@id/fabProductsSort"
+        app:layout_constraintTop_toTopOf="@id/fabProductsSort" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabProductsSort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_25sdp"
-        android:src="@drawable/ic_sort_by_alpha_white"
         android:backgroundTint="@color/colorPrimary"
-        app:elevation="@dimen/_5sdp"
-        app:pressedTranslationZ="@dimen/_12sdp"
-        app:rippleColor="@color/colorAccent"
+        android:src="@drawable/ic_sort_by_alpha_white"
         android:visibility="invisible"
+        app:borderWidth="0dp"
+        app:elevation="@dimen/_5sdp"
         app:layout_constraintBottom_toTopOf="@id/fabProductsFilter"
-        app:layout_constraintRight_toRightOf="@id/fabProductsFilter" />
+        app:layout_constraintRight_toRightOf="@id/fabProductsFilter"
+        app:pressedTranslationZ="@dimen/_12sdp"
+        app:rippleColor="@color/colorAccent" />
 
     <TextView
         android:id="@+id/tvProductsFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:padding="@dimen/_8sdp"
         android:background="#212121"
+        android:padding="@dimen/_8sdp"
         android:text="Filter"
         android:textColor="#FFFF"
         android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="@id/fabProductsFilter"
         app:layout_constraintBottom_toBottomOf="@id/fabProductsFilter"
-        app:layout_constraintRight_toLeftOf="@id/fabProductsFilter"/>
+        app:layout_constraintRight_toLeftOf="@id/fabProductsFilter"
+        app:layout_constraintTop_toTopOf="@id/fabProductsFilter" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabProductsFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_25sdp"
-        android:src="@drawable/icon_filter_white"
         android:backgroundTint="@color/colorPrimary"
-        app:elevation="@dimen/_5sdp"
-        app:pressedTranslationZ="@dimen/_12sdp"
-        app:rippleColor="@color/colorAccent"
+        android:src="@drawable/icon_filter_white"
         android:visibility="invisible"
+        app:borderWidth="0dp"
+        app:elevation="@dimen/_5sdp"
         app:layout_constraintBottom_toTopOf="@id/fabProductsSortFilter"
-        app:layout_constraintRight_toRightOf="@id/fabProductsSortFilter" />
+        app:layout_constraintRight_toRightOf="@id/fabProductsSortFilter"
+        app:pressedTranslationZ="@dimen/_12sdp"
+        app:rippleColor="@color/colorAccent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabProductsSortFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_15sdp"
-        android:src="@drawable/icon_sortfilter_white"
         android:backgroundTint="@color/colorPrimaryDark"
-        app:elevation="@dimen/_5sdp"
-        app:pressedTranslationZ="@dimen/_12sdp"
-        app:rippleColor="@color/colorAccent"
+        android:src="@drawable/icon_sortfilter_white"
         app:borderWidth="0dp"
+        app:elevation="@dimen/_5sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:pressedTranslationZ="@dimen/_12sdp"
+        app:rippleColor="@color/colorAccent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
