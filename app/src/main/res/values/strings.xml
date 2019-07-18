@@ -22,4 +22,35 @@
     <string name="action_settings">Settings</string>
     <string name="all_subcategory">All SubCategory</string>
 
+    <!-- Products -->
+    <string name="product_accessories">Accessories</string>
+    <string name="product_aio">All in One</string>
+    <string name="product_casing">Casing</string>
+    <string name="product_cooler">Cooler</string>
+    <string name="product_drawing">Drawer</string>
+    <string name="product_drone">Drone</string>
+    <string name="product_fd">Flash Drive</string>
+    <string name="product_gadget">Gadget</string>
+    <string name="product_hdd">Hard Drive</string>
+    <string name="product_headset">Headset</string>
+    <string name="product_keyboard">Keyboard</string>
+    <string name="product_lcd">LCD</string>
+    <string name="product_sdcard">Memory Card</string>
+    <string name="product_motherboard">Motherboard</string>
+    <string name="product_networking">Networking</string>
+    <string name="product_notebook">Notebook</string>
+    <string name="product_optical">Optical</string>
+    <string name="product_printer">Printer</string>
+    <string name="product_processor">Processor</string>
+    <string name="product_projector">Projector</string>
+    <string name="product_psu">PSU</string>
+    <string name="product_ram">RAM</string>
+    <string name="product_server">Server</string>
+    <string name="product_software">Software</string>
+    <string name="product_ssd">SSD</string>
+    <string name="product_soundcard">Sound Card</string>
+    <string name="product_speaker">Speaker</string>
+    <string name="product_ups">UPS</string>
+    <string name="product_vga">VGA</string>
+
 </resources>

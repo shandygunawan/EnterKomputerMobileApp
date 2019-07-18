@@ -26,7 +26,7 @@ interface Endpoints {
         @GET(Constants.Endpoints.ENDPOINT_PRODUCT_DRONE)
         fun getListDrone(): Call<List<Product>>
 
-        @GET(Constants.Endpoints.ENDPOINT_PRODUCT_FLASHDISK)
+        @GET(Constants.Endpoints.ENDPOINT_PRODUCT_FLASHDRIVE)
         fun getListFlashdisk(): Call<List<Product>>
 
         @GET("gadget.json")

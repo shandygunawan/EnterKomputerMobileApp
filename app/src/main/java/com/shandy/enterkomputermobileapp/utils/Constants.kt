@@ -11,7 +11,7 @@ object Constants {
         const val ENDPOINT_PRODUCT_COOLER = "coolerfan.json"
         const val ENDPOINT_PRODUCT_DRAWING = "drawing.json"
         const val ENDPOINT_PRODUCT_DRONE = "drone.json"
-        const val ENDPOINT_PRODUCT_FLASHDISK = "flashdisk.json"
+        const val ENDPOINT_PRODUCT_FLASHDRIVE = "flashdisk.json"
     }
 
     /* URL */
@@ -30,7 +30,7 @@ object Constants {
         const val PRODUCT_COOLER = "cooler"
         const val PRODUCT_DRAWING = "drawing"
         const val PRODUCT_DRONE = "drone"
-        const val PRODUCT_FLASHDISK = "flashdisk"
+        const val PRODUCT_FLASHDRIVE = "flashdrive"
     }
 
     object ECommerces {
@@ -50,13 +50,35 @@ object Constants {
 
     object Lists {
         val LIST_PRODUCTS = listOf(
-            R.drawable.icon_accessories_black,
-            R.drawable.icon_aio_black,
-            R.drawable.icon_casing_black,
-            R.drawable.icon_cooler_black,
-            R.drawable.icon_drawing_black,
-            R.drawable.icon_drone_black,
-            R.drawable.icon_flashdisk_black
+            R.drawable.icon_product_category_others_colored,
+            R.drawable.icon_product_category_aio_colored,
+            R.drawable.icon_product_category_casing_colored,
+            R.drawable.icon_product_category_cooler_colored,
+            R.drawable.icon_product_category_drawing_colored,
+            R.drawable.icon_product_category_drone_colored,
+            R.drawable.icon_product_category_fd_colored,
+            R.drawable.icon_product_category_smartphone_colored,
+            R.drawable.icon_product_category_hdd_colored,
+            R.drawable.icon_product_category_headset_colored,
+            R.drawable.icon_product_category_keyboard_colored,
+            R.drawable.icon_product_category_lcd_colored,
+            R.drawable.icon_product_category_sdcard_colored,
+            R.drawable.icon_product_category_motherboard_colored,
+            R.drawable.icon_product_category_networking_colored,
+            R.drawable.icon_product_category_notebook_colored,
+            R.drawable.icon_product_category_optical_colored,
+            R.drawable.icon_product_category_printer_colored,
+            R.drawable.icon_product_category_processor_colored,
+            R.drawable.icon_product_category_projector_colored,
+            R.drawable.icon_product_category_psu_colored,
+            R.drawable.icon_product_category_ram_colored,
+            R.drawable.icon_product_category_server_colored,
+            R.drawable.icon_product_category_software_colored,
+            R.drawable.icon_product_category_ssd_colored,
+            R.drawable.icon_product_category_soundcard_colored,
+            R.drawable.icon_product_category_speaker_colored,
+            R.drawable.icon_product_category_ups_colored,
+            R.drawable.icon_product_category_vga_colored
         )
     }
 

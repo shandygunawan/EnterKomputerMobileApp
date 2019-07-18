@@ -5,15 +5,10 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.PopupMenu
-import androidx.appcompat.view.menu.MenuBuilder
-import androidx.appcompat.view.menu.MenuPopupHelper
-import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -106,13 +101,13 @@ class ProductsFragment(paramContext: Context) : Fragment(), ProductsView,
                 .create(ProductEndpoints::class.java)
 
             when(category){
-                Constants.Products.PRODUCT_ACCESSORIES -> products = webServices.getListAccessories().execute().body()
-                Constants.Products.PRODUCT_AIO -> products = webServices.getListAIO().execute().body()
-                Constants.Products.PRODUCT_CASING -> products = webServices.getListCasing().execute().body()
-                Constants.Products.PRODUCT_COOLER -> products = webServices.getListCoolerFan().execute().body()
-                Constants.Products.PRODUCT_DRAWING -> products = webServices.getListDrawingTablet().execute().body()
-                Constants.Products.PRODUCT_DRONE -> products = webServices.getListDrone().execute().body()
-                Constants.Products.PRODUCT_FLASHDISK -> products = webServices.getListFlashdisk().execute().body()
+                getString(R.string.product_accessories) -> products = webServices.getListAccessories().execute().body()
+                getString(R.string.product_aio) -> products = webServices.getListAIO().execute().body()
+                getString(R.string.product_casing) -> products = webServices.getListCasing().execute().body()
+                getString(R.string.product_cooler) -> products = webServices.getListCoolerFan().execute().body()
+                getString(R.string.product_drawing) -> products = webServices.getListDrawingTablet().execute().body()
+                getString(R.string.product_drone) -> products = webServices.getListDrone().execute().body()
+                getString(R.string.product_fd) -> products = webServices.getListFlashdisk().execute().body()
                 else -> products = null
             }
             for(product in products!!){
@@ -156,13 +151,15 @@ class ProductsFragment(paramContext: Context) : Fragment(), ProductsView,
             resources.getColorStateList(R.color.tab_icon_products)
         }
 
-        for(i in 0..tabLayoutListProducts.tabCount){
+        for(i in 0 until tabLayoutListProducts.tabCount-1){
             val tab = tabLayoutListProducts.getTabAt(i)
 
-            /* Optmize Icons */
+            /* Optimize Icons */
+
             tab?.icon = BitmapDrawable(resources, ImageLoader.decodeSampledBitmapFromResource(
                 resources, Constants.Lists.LIST_PRODUCTS[i], R.dimen._30sdp, R.dimen._30sdp)
             )
+
 
             /* Change Icon color tint to colorPrimary when selected */
             var icon = tab?.icon
@@ -175,15 +172,7 @@ class ProductsFragment(paramContext: Context) : Fragment(), ProductsView,
         tabLayoutListProducts.addOnTabSelectedListener(
             object: TabLayout.OnTabSelectedListener{
                 override fun onTabReselected(tab: TabLayout.Tab?) {
-                    when(tab?.position){
-                        0 -> showProducts(Constants.Products.PRODUCT_ACCESSORIES)
-                        1 -> showProducts(Constants.Products.PRODUCT_AIO)
-                        2 -> showProducts(Constants.Products.PRODUCT_CASING)
-                        3 -> showProducts(Constants.Products.PRODUCT_COOLER)
-                        4 -> showProducts(Constants.Products.PRODUCT_DRAWING)
-                        5 -> showProducts(Constants.Products.PRODUCT_DRONE)
-                        6 -> showProducts(Constants.Products.PRODUCT_FLASHDISK)
-                    }
+                    showProducts(tab?.text.toString())
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -191,15 +180,7 @@ class ProductsFragment(paramContext: Context) : Fragment(), ProductsView,
                 }
 
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-                    when(tab?.position){
-                        0 -> showProducts(Constants.Products.PRODUCT_ACCESSORIES)
-                        1 -> showProducts(Constants.Products.PRODUCT_AIO)
-                        2 -> showProducts(Constants.Products.PRODUCT_CASING)
-                        3 -> showProducts(Constants.Products.PRODUCT_COOLER)
-                        4 -> showProducts(Constants.Products.PRODUCT_DRAWING)
-                        5 -> showProducts(Constants.Products.PRODUCT_DRONE)
-                        6 -> showProducts(Constants.Products.PRODUCT_FLASHDISK)
-                    }
+                    showProducts(tab?.text.toString())
                 }
             }
         )
@@ -361,9 +342,9 @@ class ProductsFragment(paramContext: Context) : Fragment(), ProductsView,
         val maxPrice = prices.last().toInt()
 
         return toFilter?.filter {
-            it.price.toInt() in minPrice..maxPrice
+            it.price in minPrice..maxPrice
         } ?: products?.filter {
-            it.price.toInt() in minPrice..maxPrice
+            it.price in minPrice..maxPrice
         }
     }
 
