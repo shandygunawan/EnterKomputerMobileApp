@@ -1,5 +1,6 @@
 package com.shandy.enterkomputermobileapp.utils
 
+import android.content.res.Resources
 import com.shandy.enterkomputermobileapp.R
 
 object Constants {
@@ -12,6 +13,28 @@ object Constants {
         const val ENDPOINT_PRODUCT_DRAWING = "drawing.json"
         const val ENDPOINT_PRODUCT_DRONE = "drone.json"
         const val ENDPOINT_PRODUCT_FLASHDRIVE = "flashdisk.json"
+        const val ENDPOINT_PRODUCT_GADGET = "gadget.json"
+        const val ENDPOINT_PRODUCT_HDD = "harddisk.json"
+        const val ENDPOINT_PRODUCT_HEADSET = "headset.json"
+        const val ENDPOINT_PRODUCT_KEYBOARD = "keyboard.json"
+        const val ENDPOINT_PRODUCT_LCD = "lcd.json"
+        const val ENDPOINT_PRODUCT_SDCARD = "memorycard.json"
+        const val ENDPOINT_PRODUCT_MOTHERBOARD = "motherboard.json"
+        const val ENDPOINT_PRODUCT_NETWORKING = "networking.json"
+        const val ENDPOINT_PRODUCT_NOTEBOOK = "notebook.json"
+        const val ENDPOINT_PRODUCT_OPTICAL = "optical.json"
+        const val ENDPOINT_PRODUCT_PRINTER = "printer.json"
+        const val ENDPOINT_PRODUCT_PROCESSOR = "processor.json"
+        const val ENDPOINT_PRODUCT_PROJECTOR = "projector.json"
+        const val ENDPOINT_PRODUCT_PSU = "psu.json"
+        const val ENDPOINT_PRODUCT_RAM = "memoryram.json"
+        const val ENDPOINT_PRODUCT_SERVER = "server.json"
+        const val ENDPOINT_PRODUCT_SOFTWARE = "software.json"
+        const val ENDPOINT_PRODUCT_SOUNDCARD = "soundcard.json"
+        const val ENDPOINT_PRODUCT_SPEAKER = "speaker.json"
+        const val ENDPOINT_PRODUCT_SSD = "ssd.json"
+        const val ENDPOINT_PRODUCT_UPS = "ups.json"
+        const val ENDPOINT_PRODUCT_VGA = "vga.json"
     }
 
     /* URL */
@@ -24,13 +47,35 @@ object Constants {
     }
 
     object Products {
-        const val PRODUCT_ACCESSORIES = "accessories"
-        const val PRODUCT_AIO = "allinone"
-        const val PRODUCT_CASING = "casing"
-        const val PRODUCT_COOLER = "cooler"
-        const val PRODUCT_DRAWING = "drawing"
-        const val PRODUCT_DRONE = "drone"
-        const val PRODUCT_FLASHDRIVE = "flashdrive"
+        const val PRODUCT_ACCESSORIES = "Accessories"
+        const val PRODUCT_AIO = "All in One"
+        const val PRODUCT_CASING = "Casing"
+        const val PRODUCT_COOLER = "Cooler"
+        const val PRODUCT_DRAWING = "Drawing"
+        const val PRODUCT_DRONE = "Drone"
+        const val PRODUCT_FLASHDRIVE = "Flash Drive"
+        const val PRODUCT_GADGET = "Gadget"
+        const val PRODUCT_HDD = "Hard Drive"
+        const val PRODUCT_HEADSET = "Headset"
+        const val PRODUCT_KEYBOARD = "Keyboard"
+        const val PRODUCT_LCD = "LCD"
+        const val PRODUCT_SDCARD = "Memory Card"
+        const val PRODUCT_MOTHERBOARD = "Motherboard"
+        const val PRODUCT_NETWORKING = "Networking"
+        const val PRODUCT_NOTEBOOK = "Notebook"
+        const val PRODUCT_OPTICAL = "Optical"
+        const val PRODUCT_PRINTER = "Printer"
+        const val PRODUCT_PROCESSOR = "Processor"
+        const val PRODUCT_PROJECTOR = "Projector"
+        const val PRODUCT_PSU = "PSU"
+        const val PRODUCT_RAM = "RAM"
+        const val PRODUCT_SERVER = "Server"
+        const val PRODUCT_SOFTWARE = "Software"
+        const val PRODUCT_SSD = "SSD"
+        const val PRODUCT_SOUNDCARD = "Sound Card"
+        const val PRODUCT_SPEAKER = "Speaker"
+        const val PRODUCT_UPS = "UPS"
+        const val PRODUCT_VGA = "VGA"
     }
 
     object ECommerces {

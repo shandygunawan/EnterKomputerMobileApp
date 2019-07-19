@@ -1,4 +1,4 @@
-package com.shandy.enterkomputermobileapp.presentation.products
+package com.shandy.enterkomputermobileapp.presentation.product
 
 import android.app.SearchManager
 import android.content.Intent

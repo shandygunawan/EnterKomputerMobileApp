@@ -1,4 +1,4 @@
-package com.shandy.enterkomputermobileapp.presentation.products
+package com.shandy.enterkomputermobileapp.presentation.product
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -12,12 +12,12 @@ import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.utils.Constants
 import kotlinx.android.synthetic.main.dialog_sort_products.view.*
 
-class ProductsSortDialog(paramFrag : ProductsFragment) : DialogFragment() {
+class ProductSortDialog(paramFrag : ProductFragment) : DialogFragment() {
 
     /*************************************************************
      *                          VARIABLES                        *
      *************************************************************/
-    private val frag: ProductsFragment = paramFrag
+    private val frag: ProductFragment = paramFrag
     private lateinit var v: View
     private var sortCategories = ArrayList<String>()
     private var sortMode = ArrayList<String>()
@@ -29,8 +29,8 @@ class ProductsSortDialog(paramFrag : ProductsFragment) : DialogFragment() {
      *                          INTERFACES                        *
      *************************************************************/
     interface ProductsSortDialogListener {
-        fun onProductsSortDialogPositiveClick(dialog : ProductsSortDialog)
-        fun onProductsSortDialogNegativeClick(dialog: ProductsSortDialog)
+        fun onProductsSortDialogPositiveClick(dialog : ProductSortDialog)
+        fun onProductsSortDialogNegativeClick(dialog: ProductSortDialog)
     }
 
     /*************************************************************

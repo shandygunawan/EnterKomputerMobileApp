@@ -15,7 +15,7 @@ import com.google.android.material.navigation.NavigationView
 import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.presentation.home.HomeFragment
 import com.shandy.enterkomputermobileapp.presentation.howto.HowToFragment
-import com.shandy.enterkomputermobileapp.presentation.products.ProductsFragment
+import com.shandy.enterkomputermobileapp.presentation.product.ProductFragment
 import com.shandy.enterkomputermobileapp.utils.Constants
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 newFragment = HomeFragment()
             }
             Constants.Navigation.NAVIGATION_PRODUCTS -> {
-                newFragment = ProductsFragment(applicationContext)
+                newFragment = ProductFragment(applicationContext)
             }
             Constants.Navigation.NAVIGATION_SIMULATION -> {}
             Constants.Navigation.NAVIGATION_HOW_TO -> {
