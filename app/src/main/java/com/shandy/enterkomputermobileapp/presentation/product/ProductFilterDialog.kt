@@ -164,8 +164,8 @@ class ProductFilterDialog(paramFrag: ProductFragment, paramProducts: List<Produc
             }
             subCategories.sort()
             brands.sort()
-            subCategories.add(0, Constants.Filters.FILTER_PRODUCTS_ALLSUBCATEGORY)
-            brands.add(0, Constants.Filters.FILTER_PRODUCTS_ALLBRANDS)
+            subCategories.add(0, frag.context!!.getString(R.string.all_subcategory))
+            brands.add(0, frag.context!!.getString(R.string.all_brands))
         }
     }
 

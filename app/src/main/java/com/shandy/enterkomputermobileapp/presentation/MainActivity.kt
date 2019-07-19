@@ -1,5 +1,6 @@
 package com.shandy.enterkomputermobileapp.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.view.Menu
@@ -28,6 +29,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var navView: NavigationView
     private lateinit var fragmentMain: Fragment
 
+    companion object {
+        private lateinit var mContext: Context
+        fun getContext(): Context = mContext
+    }
+
     /*************************************************************
      *                          LIFECYCLE                        *
      *************************************************************/
@@ -37,6 +43,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         toolbar = findViewById(R.id.toolbarMain)
         setSupportActionBar(toolbar)
+
+        mContext = this
 
         /* Initialize Navigation Drawer */
         initNavigationDrawer()

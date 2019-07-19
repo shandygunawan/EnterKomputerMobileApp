@@ -1,8 +1,10 @@
 package com.shandy.enterkomputermobileapp.repository
 
+import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.network.Endpoints
 import com.shandy.enterkomputermobileapp.network.RetrofitClient
+import com.shandy.enterkomputermobileapp.presentation.MainActivity
 import com.shandy.enterkomputermobileapp.utils.Constants
 
 class ProductRemoteDataSource : ProductData.RemoteDataSource {
@@ -12,37 +14,38 @@ class ProductRemoteDataSource : ProductData.RemoteDataSource {
         .create(Endpoints.ProductEndpoints::class.java)
 
     override fun loadProducts(category: String): List<Product>? {
+        val con = MainActivity.getContext()
         return when(category){
-            Constants.Products.PRODUCT_ACCESSORIES -> webServices.getListAccessories().execute().body()
-            Constants.Products.PRODUCT_AIO -> webServices.getListAIO().execute().body()
-            Constants.Products.PRODUCT_CASING -> webServices.getListCasing().execute().body()
-            Constants.Products.PRODUCT_COOLER -> webServices.getListCoolerFan().execute().body()
-            Constants.Products.PRODUCT_DRAWING -> webServices.getListDrawingTablet().execute().body()
-            Constants.Products.PRODUCT_DRONE -> webServices.getListDrone().execute().body()
-            Constants.Products.PRODUCT_FLASHDRIVE -> webServices.getListFlashDrive().execute().body()
-            Constants.Products.PRODUCT_GADGET -> webServices.getListGadget().execute().body()
-            Constants.Products.PRODUCT_HDD -> webServices.getListHDD().execute().body()
-            Constants.Products.PRODUCT_HEADSET -> webServices.getListHeadset().execute().body()
-            Constants.Products.PRODUCT_KEYBOARD -> webServices.getListKeyboard().execute().body()
-            Constants.Products.PRODUCT_LCD -> webServices.getListLCD().execute().body()
-            Constants.Products.PRODUCT_SDCARD -> webServices.getListSDCard().execute().body()
-            Constants.Products.PRODUCT_MOTHERBOARD -> webServices.getListMotherboard().execute().body()
-            Constants.Products.PRODUCT_NETWORKING -> webServices.getListNetworking().execute().body()
-            Constants.Products.PRODUCT_NOTEBOOK -> webServices.getListNotebook().execute().body()
-            Constants.Products.PRODUCT_OPTICAL -> webServices.getListOptical().execute().body()
-            Constants.Products.PRODUCT_PRINTER -> webServices.getListPrinter().execute().body()
-            Constants.Products.PRODUCT_PROCESSOR -> webServices.getListProcessor().execute().body()
-            Constants.Products.PRODUCT_PROJECTOR -> webServices.getListProjector().execute().body()
-            Constants.Products.PRODUCT_PSU -> webServices.getListPSU().execute().body()
-            Constants.Products.PRODUCT_RAM -> webServices.getListRAM().execute().body()
-            Constants.Products.PRODUCT_SERVER -> webServices.getListServer().execute().body()
-            Constants.Products.PRODUCT_SOFTWARE -> webServices.getListSoftware().execute().body()
-            Constants.Products.PRODUCT_SSD -> webServices.getListSSD().execute().body()
-            Constants.Products.PRODUCT_SOUNDCARD -> webServices.getListSoundcard().execute().body()
-            Constants.Products.PRODUCT_SPEAKER -> webServices.getListSpeaker().execute().body()
-            Constants.Products.PRODUCT_UPS -> webServices.getListUPS().execute().body()
-            Constants.Products.PRODUCT_VGA -> webServices.getListVGA().execute().body()
+            con.getString(R.string.product_accessories) -> webServices.getListAccessories().execute().body()
+            con.getString(R.string.product_aio) -> webServices.getListAIO().execute().body()
+            con.getString(R.string.product_casing) -> webServices.getListCasing().execute().body()
+            con.getString(R.string.product_cooler) -> webServices.getListCoolerFan().execute().body()
+            con.getString(R.string.product_drawing) -> webServices.getListDrawingTablet().execute().body()
+            con.getString(R.string.product_drone) -> webServices.getListDrone().execute().body()
+            con.getString(R.string.product_fd) -> webServices.getListFlashDrive().execute().body()
+            con.getString(R.string.product_gadget) -> webServices.getListGadget().execute().body()
+            con.getString(R.string.product_hdd) -> webServices.getListHDD().execute().body()
+            con.getString(R.string.product_headset) -> webServices.getListHeadset().execute().body()
+            con.getString(R.string.product_keyboard) -> webServices.getListKeyboard().execute().body()
+            con.getString(R.string.product_lcd) -> webServices.getListLCD().execute().body()
+            con.getString(R.string.product_sdcard) -> webServices.getListSDCard().execute().body()
+            con.getString(R.string.product_motherboard) -> webServices.getListMotherboard().execute().body()
+            con.getString(R.string.product_networking) -> webServices.getListNetworking().execute().body()
+            con.getString(R.string.product_notebook) -> webServices.getListNotebook().execute().body()
+            con.getString(R.string.product_optical) -> webServices.getListOptical().execute().body()
+            con.getString(R.string.product_printer) -> webServices.getListPrinter().execute().body()
+            con.getString(R.string.product_processor) -> webServices.getListProcessor().execute().body()
+            con.getString(R.string.product_projector) -> webServices.getListProjector().execute().body()
+            con.getString(R.string.product_psu) -> webServices.getListPSU().execute().body()
+            con.getString(R.string.product_ram) -> webServices.getListRAM().execute().body()
+            con.getString(R.string.product_server) -> webServices.getListServer().execute().body()
+            con.getString(R.string.product_software) -> webServices.getListSoftware().execute().body()
+            con.getString(R.string.product_ssd) -> webServices.getListSSD().execute().body()
+            con.getString(R.string.product_soundcard) -> webServices.getListSoundcard().execute().body()
+            con.getString(R.string.product_speaker) -> webServices.getListSpeaker().execute().body()
+            con.getString(R.string.product_ups) -> webServices.getListUPS().execute().body()
+            con.getString(R.string.product_vga) -> webServices.getListVGA().execute().body()
             else -> null
-        }
+        }?.sortedBy { it.name }
     }
 }

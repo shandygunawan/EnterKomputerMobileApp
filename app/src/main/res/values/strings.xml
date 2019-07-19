@@ -21,6 +21,7 @@
     <!-- Options Menu -->
     <string name="action_settings">Settings</string>
     <string name="all_subcategory">All SubCategory</string>
+    <string name="all_brands">All Brands</string>
 
     <!-- Products -->
     <string name="product_accessories">Accessories</string>

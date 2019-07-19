@@ -1,6 +1,8 @@
 package com.shandy.enterkomputermobileapp.repository
 
+import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.models.Product
+import com.shandy.enterkomputermobileapp.presentation.MainActivity
 import com.shandy.enterkomputermobileapp.utils.Constants
 
 class ProductLocalDataSource : ProductData.LocalDataSource {
@@ -68,7 +70,8 @@ class ProductLocalDataSource : ProductData.LocalDataSource {
     }
 
     private fun filterBrand(brand: String?, toFilter: List<Product>?, mainProducts: List<Product>?): List<Product>?{
-        if(brand == Constants.Filters.FILTER_PRODUCTS_ALLBRANDS) return toFilter
+        val con = MainActivity.getContext()
+        if(brand == con.getString(R.string.all_brands)) return toFilter
         return toFilter?.filter {
             it.brand_description.contains(brand.toString())
         } ?: mainProducts?.filter {
@@ -77,7 +80,8 @@ class ProductLocalDataSource : ProductData.LocalDataSource {
     }
 
     private fun filterSubCategory(subcat: String?, toFilter: List<Product>?, mainProducts: List<Product>?): List<Product>?{
-        if(subcat == Constants.Filters.FILTER_PRODUCTS_ALLSUBCATEGORY) return toFilter
+        val con = MainActivity.getContext()
+        if(subcat == con.getString(R.string.all_subcategory)) return toFilter
         return toFilter?.filter {
             it.subcategory_description.contains(subcat.toString())
         } ?: mainProducts?.filter {
