@@ -149,6 +149,35 @@ class ProductFilterDialog(paramFrag: ProductFragment, paramProducts: List<Produc
         })
     }
 
+    private fun initSpinnersContents(){
+        brands.clear()
+        subCategories.clear()
+        if(products != null){
+            val isSubCatInserted = HashMap<String, Boolean>()
+            val isBrandInserted = HashMap<String, Boolean>()
+
+            for(product in products){
+                if(product.subcategory_description != Constants.Strings.STRING_EMPTY &&
+                    (isSubCatInserted[product.subcategory_description] != true
+                            || isSubCatInserted[product.subcategory_description] == null)){
+                    subCategories.add(product.subcategory_description)
+                    isSubCatInserted[product.subcategory_description] = true
+                }
+
+                if(product.brand_description != Constants.Strings.STRING_EMPTY &&
+                    (isSubCatInserted[product.brand_description] != true
+                            || isSubCatInserted[product.brand_description] == null)){
+                    brands.add(product.brand_description)
+                    isBrandInserted[product.brand_description] = true
+                }
+            }
+            subCategories.sort()
+            brands.sort()
+            subCategories.add(0, getString(R.string.all_subcategory))
+            brands.add(0, "All Brands")
+        }
+    }
+
     private fun initSpinners(){
 
         // Spinner for brands
@@ -212,36 +241,6 @@ class ProductFilterDialog(paramFrag: ProductFragment, paramProducts: List<Produc
             else {
                 setFilter(Constants.Filters.FILTER_PRODUCTS_LINK_SHOPEE,
                     Constants.States.CHECKBOX_UNCHECKED)
-            }
-        }
-    }
-
-    private fun initSpinnersContents(){
-        brands.clear()
-        subCategories.clear()
-        if(products != null){
-            val isSubCatInserted = HashMap<String, Boolean>()
-            val isBrandInserted = HashMap<String, Boolean>()
-
-            for(product in products){
-                if(product.subcategory_description != Constants.Strings.STRING_EMPTY &&
-                    (isSubCatInserted[product.subcategory_description] != true
-                            || isSubCatInserted[product.subcategory_description] == null)){
-                    subCategories.add(product.subcategory_description)
-                    isSubCatInserted[product.subcategory_description] = true
-                }
-
-                if(product.brand_description != Constants.Strings.STRING_EMPTY &&
-                    (isSubCatInserted[product.brand_description] != true
-                            || isSubCatInserted[product.brand_description] == null)){
-                    brands.add(product.brand_description)
-                    isBrandInserted[product.brand_description] = true
-                }
-
-                subCategories.sort()
-                brands.sort()
-                subCategories.add(0, getString(R.string.all_subcategory))
-                brands.add(0, "All Brands")
             }
         }
     }

@@ -1,7 +1,5 @@
 package com.shandy.enterkomputermobileapp.repository
 
-import android.content.res.Resources
-import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.utils.Constants
 
@@ -79,7 +77,7 @@ class ProductLocalDataSource : ProductData.LocalDataSource {
     }
 
     private fun filterSubCategory(subcat: String?, toFilter: List<Product>?, mainProducts: List<Product>?): List<Product>?{
-        if(subcat == Resources.getSystem().getString(R.string.all_subcategory)) return toFilter
+        if(subcat == Constants.Filters.FILTER_PRODUCTS_ALLSUBCATEGORY) return toFilter
         return toFilter?.filter {
             it.subcategory_description.contains(subcat.toString())
         } ?: mainProducts?.filter {
