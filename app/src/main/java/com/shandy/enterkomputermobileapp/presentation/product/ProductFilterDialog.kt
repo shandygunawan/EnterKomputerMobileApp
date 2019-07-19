@@ -15,6 +15,7 @@ import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.utils.Constants
 import kotlinx.android.synthetic.main.dialog_filter_products.view.*
 import org.jetbrains.anko.sdk27.coroutines.onCheckedChange
+import org.jetbrains.anko.sdk27.coroutines.onItemSelectedListener
 
 class ProductFilterDialog(paramFrag: ProductFragment, paramProducts: List<Product>?) : DialogFragment(){
 
@@ -114,16 +115,6 @@ class ProductFilterDialog(paramFrag: ProductFragment, paramProducts: List<Produc
             }
         })
 
-        v.etFilterBrand.addTextChangedListener(object: TextWatcher{
-            override fun afterTextChanged(s: Editable?) {}
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                setFilter(Constants.Filters.FILTER_PRODUCTS_BRAND, s.toString())
-            }
-        })
-
         v.etFilterMinPrice.addTextChangedListener(object: TextWatcher{
             override fun afterTextChanged(s: Editable?) {}
 
@@ -165,22 +156,41 @@ class ProductFilterDialog(paramFrag: ProductFragment, paramProducts: List<Produc
                 }
 
                 if(product.brand_description != Constants.Strings.STRING_EMPTY &&
-                    (isSubCatInserted[product.brand_description] != true
-                            || isSubCatInserted[product.brand_description] == null)){
+                    (isBrandInserted[product.brand_description] != true
+                            || isBrandInserted[product.brand_description] == null)){
                     brands.add(product.brand_description)
                     isBrandInserted[product.brand_description] = true
                 }
             }
             subCategories.sort()
             brands.sort()
-            subCategories.add(0, getString(R.string.all_subcategory))
-            brands.add(0, "All Brands")
+            subCategories.add(0, Constants.Filters.FILTER_PRODUCTS_ALLSUBCATEGORY)
+            brands.add(0, Constants.Filters.FILTER_PRODUCTS_ALLBRANDS)
         }
     }
 
     private fun initSpinners(){
 
         // Spinner for brands
+        v.spinnerFilterBrand.adapter =
+                ArrayAdapter(frag.context,
+                    android.R.layout.simple_dropdown_item_1line, brands)
+
+        v.spinnerFilterBrand.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do Nothing
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selection = parent?.getItemAtPosition(position)
+                setFilter(Constants.Filters.FILTER_PRODUCTS_BRAND, selection.toString())
+            }
+        }
 
         // Spinner for SubCategories
         v.spinnerFilterSubCategory.adapter =

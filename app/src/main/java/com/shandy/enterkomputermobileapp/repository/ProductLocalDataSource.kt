@@ -68,7 +68,7 @@ class ProductLocalDataSource : ProductData.LocalDataSource {
     }
 
     private fun filterBrand(brand: String?, toFilter: List<Product>?, mainProducts: List<Product>?): List<Product>?{
-        if(brand == null) return toFilter
+        if(brand == Constants.Filters.FILTER_PRODUCTS_ALLBRANDS) return toFilter
         return toFilter?.filter {
             it.brand_description.contains(brand.toString())
         } ?: mainProducts?.filter {

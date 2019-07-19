@@ -137,6 +137,7 @@ object Constants {
         const val FILTER_PRODUCTS_LINK_TOKOPEDIA = "filter_products_link_tokopedia"
         const val FILTER_PRODUCTS_LINK_SHOPEE = "filter_products_link_shopee"
         const val FILTER_PRODUCTS_ALLSUBCATEGORY = "All SubCategory"
+        const val FILTER_PRODUCTS_ALLBRANDS = "All Brands"
     }
 
     object Sort {

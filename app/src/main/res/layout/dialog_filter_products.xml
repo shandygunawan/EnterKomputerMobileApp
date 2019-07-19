@@ -18,22 +18,22 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Brand -->
-    <com.google.android.material.textfield.TextInputLayout
+    <Spinner
+        android:id="@+id/spinnerFilterBrand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_10sdp"
-        android:hint="Brand">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etFilterBrand"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp" />
 
     <!-- Sub Categories -->
     <Spinner
         android:id="@+id/spinnerFilterSubCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"/>
 
