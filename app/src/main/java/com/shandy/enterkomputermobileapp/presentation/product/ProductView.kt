@@ -5,4 +5,6 @@ import com.shandy.enterkomputermobileapp.presentation.BaseView
 
 interface ProductView : BaseView {
     fun showProducts(products: List<Product>?, category: String)
+    fun showFilterDialog()
+    fun showSortDialog()
 }

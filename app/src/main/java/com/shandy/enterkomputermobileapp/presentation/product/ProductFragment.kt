@@ -112,6 +112,16 @@ class ProductFragment(paramContext: Context) : Fragment(), ProductView,
         if(rvListProducts != null) rvListProducts.adapter = ProductAdapter(products)
     }
 
+    override fun showFilterDialog() {
+        ProductFilterDialog(this@ProductFragment,
+            shownProducts).show(fragmentManager, this.tag)
+    }
+
+    override fun showSortDialog() {
+        ProductSortDialog(this@ProductFragment)
+            .show(fragmentManager, this.tag)
+    }
+
     /*************************************************************
      *                        TAB LAYOUT                         *
      *************************************************************/
@@ -199,13 +209,11 @@ class ProductFragment(paramContext: Context) : Fragment(), ProductView,
         }
 
         fabProductsFilter.setOnClickListener {
-            ProductFilterDialog(this@ProductFragment,
-                shownProducts).show(fragmentManager, "Filter")
+            showFilterDialog()
         }
 
         fabProductsSort.setOnClickListener {
-            ProductSortDialog(this@ProductFragment)
-                .show(fragmentManager, "Sort")
+            showSortDialog()
         }
     }
 
