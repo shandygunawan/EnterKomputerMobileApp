@@ -14,7 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.shandy.enterkomputermobileapp.R
-import com.shandy.enterkomputermobileapp.presentation.home.HomeFragment
+import com.shandy.enterkomputermobileapp.presentation.website.WebsiteFragment
 import com.shandy.enterkomputermobileapp.presentation.howto.HowToFragment
 import com.shandy.enterkomputermobileapp.presentation.product.ProductFragment
 import com.shandy.enterkomputermobileapp.utils.Constants
@@ -111,12 +111,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         Handler().postDelayed({
             run {
                 when (item.itemId) {
-                    R.id.navHome -> setFragment(Constants.Navigation.NAVIGATION_HOME)
                     R.id.navProducts -> setFragment(Constants.Navigation.NAVIGATION_PRODUCTS)
                     R.id.navSimulation -> {}
                     R.id.navHowTo -> setFragment(Constants.Navigation.NAVIGATION_HOW_TO)
                     R.id.navTips -> {}
                     R.id.navOrderTracking -> { }
+                    R.id.navWebsite -> setFragment(Constants.Navigation.NAVIGATION_WEBSITE)
                 }
             }
         }, 200)
@@ -131,9 +131,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun setFragment(mode: String){
         var newFragment = Fragment()
         when(mode) {
-            Constants.Navigation.NAVIGATION_HOME -> {
-                newFragment = HomeFragment()
-            }
             Constants.Navigation.NAVIGATION_PRODUCTS -> {
                 newFragment = ProductFragment(applicationContext)
             }
@@ -143,8 +140,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             Constants.Navigation.NAVIGATION_TIPS -> {}
             Constants.Navigation.NAVIGATION_ORDER_TRACKING -> {}
-            else ->{
-                newFragment = HomeFragment()
+            Constants.Navigation.NAVIGATION_WEBSITE -> {
+                newFragment = WebsiteFragment()
+            }
+            else -> {
+                newFragment = WebsiteFragment()
             }
         }
         supportFragmentManager.beginTransaction()

@@ -1,4 +1,4 @@
-package com.shandy.enterkomputermobileapp.presentation.home
+package com.shandy.enterkomputermobileapp.presentation.website
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.shandy.enterkomputermobileapp.R
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment: Fragment(), HomeView {
+class WebsiteFragment: Fragment(), WebsiteView {
 
     /*************************************************************
      *                          VARIABLES                        *

@@ -91,6 +91,7 @@ object Constants {
         const val NAVIGATION_HOW_TO = "how_to"
         const val NAVIGATION_TIPS = "tips"
         const val NAVIGATION_ORDER_TRACKING = "order_tracking"
+        const val NAVIGATION_WEBSITE = "website"
     }
 
     object Lists {

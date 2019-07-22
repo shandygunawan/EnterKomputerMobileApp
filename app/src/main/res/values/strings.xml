@@ -11,12 +11,12 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_menu_home">Home</string>
     <string name="nav_menu_products">Products</string>
     <string name="nav_menu_simulation">Simulation</string>
     <string name="nav_menu_how_to">How to</string>
     <string name="nav_menu_tips">Tips</string>
     <string name="nav_menu_order_tracking">Order Tracking</string>
+    <string name="nav_menu_website">Website</string>
 
     <!-- Options Menu -->
     <string name="action_settings">Settings</string>
