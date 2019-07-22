@@ -92,7 +92,7 @@ class ProductFragment(paramContext: Context) : Fragment(), ProductView,
     override fun showLoading(isLoading: Boolean) {
         if(isLoading){
             rvListProducts.visibility = View.GONE
-            if(isFabOpen) setFABChildren(!isFabOpen)
+            if(isFabOpen) showFABChildren(!isFabOpen)
             fabProductsSortFilter.hide()
             pbListProducts.visibility = View.VISIBLE
         }
@@ -120,6 +120,27 @@ class ProductFragment(paramContext: Context) : Fragment(), ProductView,
     override fun showSortDialog() {
         ProductSortDialog(this@ProductFragment)
             .show(fragmentManager, this.tag)
+    }
+
+    override fun showFABChildren(isOn: Boolean){
+        if(isOn){
+            tvProductsFilter.visibility = View.VISIBLE
+            tvProductsSort.visibility = View.VISIBLE
+            fabProductsSort.startAnimation(fab_open)
+            fabProductsFilter.startAnimation(fab_open)
+            fabProductsSort.isClickable = true
+            fabProductsFilter.isClickable = true
+            isFabOpen = true
+        }
+        else {
+            tvProductsFilter.visibility = View.INVISIBLE
+            tvProductsSort.visibility = View.INVISIBLE
+            fabProductsSort.startAnimation(fab_close)
+            fabProductsFilter.startAnimation(fab_close)
+            fabProductsSort.isClickable = false
+            fabProductsFilter.isClickable = false
+            isFabOpen = false
+        }
     }
 
     /*************************************************************
@@ -182,30 +203,10 @@ class ProductFragment(paramContext: Context) : Fragment(), ProductView,
     /*************************************************************
      *                          FAB                              *
      *************************************************************/
-    private fun setFABChildren(isOn: Boolean){
-        if(isOn){
-            tvProductsFilter.visibility = View.VISIBLE
-            tvProductsSort.visibility = View.VISIBLE
-            fabProductsSort.startAnimation(fab_open)
-            fabProductsFilter.startAnimation(fab_open)
-            fabProductsSort.isClickable = true
-            fabProductsFilter.isClickable = true
-            isFabOpen = true
-        }
-        else {
-            tvProductsFilter.visibility = View.INVISIBLE
-            tvProductsSort.visibility = View.INVISIBLE
-            fabProductsSort.startAnimation(fab_close)
-            fabProductsFilter.startAnimation(fab_close)
-            fabProductsSort.isClickable = false
-            fabProductsFilter.isClickable = false
-            isFabOpen = false
-        }
-    }
 
     private fun initFAB(){
         fabProductsSortFilter.onClick {
-            setFABChildren(!isFabOpen)
+            showFABChildren(!isFabOpen)
         }
 
         fabProductsFilter.setOnClickListener {

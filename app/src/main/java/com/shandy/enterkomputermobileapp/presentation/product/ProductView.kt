@@ -7,4 +7,5 @@ interface ProductView : BaseView {
     fun showProducts(products: List<Product>?, category: String)
     fun showFilterDialog()
     fun showSortDialog()
+    fun showFABChildren(isOn: Boolean)
 }
