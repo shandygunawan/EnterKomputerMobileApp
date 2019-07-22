@@ -1,4 +1,4 @@
-package com.shandy.enterkomputermobileapp.presentation.products
+package com.shandy.enterkomputermobileapp.presentation.product
 
 import android.app.Activity
 import android.app.Dialog
@@ -13,18 +13,19 @@ import androidx.fragment.app.DialogFragment
 import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.models.Product
 import com.shandy.enterkomputermobileapp.utils.Constants
-import com.shandy.enterkomputermobileapp.utils.string.CurrencyFormatter
 import kotlinx.android.synthetic.main.dialog_filter_products.view.*
 import org.jetbrains.anko.sdk27.coroutines.onCheckedChange
+import org.jetbrains.anko.sdk27.coroutines.onItemSelectedListener
 
-class ProductsFilterDialog(paramFrag: ProductsFragment, paramProducts: List<Product>?,
-                           paramSubCats: ArrayList<String>) : DialogFragment(){
+class ProductFilterDialog(paramFrag: ProductFragment, paramProducts: List<Product>?) : DialogFragment(){
 
     /*************************************************************
      *                          VARIABLES                        *
      *************************************************************/
-    private val frag: ProductsFragment = paramFrag
-    private val subCategories: List<String> = paramSubCats
+    private val frag: ProductFragment = paramFrag
+    private val products = paramProducts
+    private var brands = ArrayList<String>()
+    private var subCategories = ArrayList<String>()
     private var filters = HashMap<String, String>()
     private lateinit var v : View
     private lateinit var listener: ProductsFilterDialogListener
@@ -33,8 +34,8 @@ class ProductsFilterDialog(paramFrag: ProductsFragment, paramProducts: List<Prod
      *                          INTERFACES                        *
      *************************************************************/
     interface ProductsFilterDialogListener{
-        fun onProductsFilterDialogPositiveClick(dialog: ProductsFilterDialog)
-        fun onProductsFilterDialogNegativeClick(dialog: ProductsFilterDialog)
+        fun onProductsFilterDialogPositiveClick(dialog: ProductFilterDialog)
+        fun onProductsFilterDialogNegativeClick(dialog: ProductFilterDialog)
     }
 
     /*************************************************************
@@ -89,6 +90,7 @@ class ProductsFilterDialog(paramFrag: ProductsFragment, paramProducts: List<Prod
     private fun initViews(){
         initPositiveNegativeButtons()
         initTILs()
+        initSpinnersContents()
         initSpinners()
         initCheckboxes()
     }
@@ -110,16 +112,6 @@ class ProductsFilterDialog(paramFrag: ProductsFragment, paramProducts: List<Prod
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 setFilter(Constants.Filters.FILTER_PRODUCTS_NAME, s.toString())
-            }
-        })
-
-        v.etFilterBrand.addTextChangedListener(object: TextWatcher{
-            override fun afterTextChanged(s: Editable?) {}
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                setFilter(Constants.Filters.FILTER_PRODUCTS_BRAND, s.toString())
             }
         })
 
@@ -148,9 +140,61 @@ class ProductsFilterDialog(paramFrag: ProductsFragment, paramProducts: List<Prod
         })
     }
 
+    private fun initSpinnersContents(){
+        brands.clear()
+        subCategories.clear()
+        if(products != null){
+            val isSubCatInserted = HashMap<String, Boolean>()
+            val isBrandInserted = HashMap<String, Boolean>()
+
+            for(product in products){
+                if(product.subcategory_description != Constants.Strings.STRING_EMPTY &&
+                    (isSubCatInserted[product.subcategory_description] != true
+                            || isSubCatInserted[product.subcategory_description] == null)){
+                    subCategories.add(product.subcategory_description)
+                    isSubCatInserted[product.subcategory_description] = true
+                }
+
+                if(product.brand_description != Constants.Strings.STRING_EMPTY &&
+                    (isBrandInserted[product.brand_description] != true
+                            || isBrandInserted[product.brand_description] == null)){
+                    brands.add(product.brand_description)
+                    isBrandInserted[product.brand_description] = true
+                }
+            }
+            subCategories.sort()
+            brands.sort()
+            subCategories.add(0, frag.context!!.getString(R.string.all_subcategory))
+            brands.add(0, frag.context!!.getString(R.string.all_brands))
+        }
+    }
+
     private fun initSpinners(){
+
+        // Spinner for brands
+        v.spinnerFilterBrand.adapter =
+                ArrayAdapter(frag.context,
+                    android.R.layout.simple_dropdown_item_1line, brands)
+
+        v.spinnerFilterBrand.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do Nothing
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selection = parent?.getItemAtPosition(position)
+                setFilter(Constants.Filters.FILTER_PRODUCTS_BRAND, selection.toString())
+            }
+        }
+
+        // Spinner for SubCategories
         v.spinnerFilterSubCategory.adapter =
-            ArrayAdapter<String>(frag.context,
+            ArrayAdapter(frag.context,
                 android.R.layout.simple_dropdown_item_1line, subCategories)
 
         v.spinnerFilterSubCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

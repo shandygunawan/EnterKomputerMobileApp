@@ -1,5 +1,6 @@
 package com.shandy.enterkomputermobileapp.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.view.Menu
@@ -15,7 +16,7 @@ import com.google.android.material.navigation.NavigationView
 import com.shandy.enterkomputermobileapp.R
 import com.shandy.enterkomputermobileapp.presentation.home.HomeFragment
 import com.shandy.enterkomputermobileapp.presentation.howto.HowToFragment
-import com.shandy.enterkomputermobileapp.presentation.products.ProductsFragment
+import com.shandy.enterkomputermobileapp.presentation.product.ProductFragment
 import com.shandy.enterkomputermobileapp.utils.Constants
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -28,6 +29,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var navView: NavigationView
     private lateinit var fragmentMain: Fragment
 
+    companion object {
+        private lateinit var mContext: Context
+        fun getContext(): Context = mContext
+    }
+
     /*************************************************************
      *                          LIFECYCLE                        *
      *************************************************************/
@@ -37,6 +43,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         toolbar = findViewById(R.id.toolbarMain)
         setSupportActionBar(toolbar)
+
+        mContext = this
 
         /* Initialize Navigation Drawer */
         initNavigationDrawer()
@@ -127,7 +135,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 newFragment = HomeFragment()
             }
             Constants.Navigation.NAVIGATION_PRODUCTS -> {
-                newFragment = ProductsFragment(applicationContext)
+                newFragment = ProductFragment(applicationContext)
             }
             Constants.Navigation.NAVIGATION_SIMULATION -> {}
             Constants.Navigation.NAVIGATION_HOW_TO -> {

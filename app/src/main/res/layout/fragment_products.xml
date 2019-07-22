@@ -22,50 +22,204 @@
             android:id="@+id/tabProductAccessories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/icon_accessories_black"
-            android:text="Accessories" />
+            android:icon="@drawable/icon_product_category_others_colored"
+            android:text="@string/product_accessories" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabProductAIO"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/icon_aio_black"
-            android:text="All in One" />
+            android:icon="@drawable/icon_product_category_aio_colored"
+            android:text="@string/product_aio" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabProductCasing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/icon_casing_black"
-            android:text="Casing" />
+            android:icon="@drawable/icon_product_category_casing_colored"
+            android:text="@string/product_casing" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabProductCoolerFan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/icon_cooler_black"
-            android:text="Cooler Fan" />
+            android:icon="@drawable/icon_product_category_cooler_colored"
+            android:text="@string/product_cooler" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabProductDrawing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/icon_drawing_black"
-            android:text="Drawing" />
+            android:icon="@drawable/icon_product_category_drawing_colored"
+            android:text="@string/product_drawing" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabProductDrone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/icon_drone_black"
-            android:text="Drone" />
+            android:icon="@drawable/icon_product_category_drone_colored"
+            android:text="@string/product_drone" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabProductFlashdisk"
+            android:id="@+id/tabProductFD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/icon_flashdisk_black"
-            android:text="Flashdisk" />
+            android:icon="@drawable/icon_product_category_fd_colored"
+            android:text="@string/product_fd" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductGadget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_smartphone_colored"
+            android:text="@string/product_gadget" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductHDD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_hdd_colored"
+            android:text="@string/product_hdd" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductHeadset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_headset_colored"
+            android:text="@string/product_headset" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductKeyboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_keyboard_colored"
+            android:text="@string/product_keyboard" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductLCD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_lcd_colored"
+            android:text="@string/product_lcd" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductSdCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_sdcard_colored"
+            android:text="@string/product_sdcard" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductMotherboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_motherboard_colored"
+            android:text="@string/product_motherboard" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductNetworking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_networking_colored"
+            android:text="@string/product_networking" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductNotebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_notebook_colored"
+            android:text="@string/product_notebook" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductOptical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_optical_colored"
+            android:text="@string/product_optical" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductPrinter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_printer_colored"
+            android:text="@string/product_printer" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductProcessor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_processor_colored"
+            android:text="@string/product_processor" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductProjector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_projector_colored"
+            android:text="@string/product_projector" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductPSU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_psu_colored"
+            android:text="@string/product_psu" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductRAM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_ram_colored"
+            android:text="@string/product_ram" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductServer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_server_colored"
+            android:text="@string/product_server" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductSoftware"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_software_colored"
+            android:text="@string/product_software" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductSSD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_ssd_colored"
+            android:text="@string/product_ssd" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductSoundCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_soundcard_colored"
+            android:text="@string/product_soundcard" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductSpeaker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_speaker_colored"
+            android:text="@string/product_speaker" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductUPS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_ups_colored"
+            android:text="@string/product_ups" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProductVGA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/icon_product_category_vga_colored"
+            android:text="@string/product_vga" />
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -74,9 +228,10 @@
         android:layout_height="wrap_content"
         android:paddingBottom="?attr/actionBarSize"
         android:scrollbars="vertical"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayoutListProducts"/>
+        app:layout_constraintTop_toBottomOf="@id/tabLayoutListProducts" />
 
     <ProgressBar
         android:id="@+id/pbListProducts"
